@@ -83,6 +83,11 @@
   .interp p:last-child { margin-bottom: 0; }
   .stats {
     display: flex; gap: 16px; margin-top: 10px; font-size: 11px; color: var(--text-dim);
+    flex-wrap: wrap;
+  }
+  .summary-line {
+    font-size: 14px; font-weight: 500; color: #e2e2ee;
+    margin-bottom: 8px; line-height: 1.6;
   }
   .loading, .error {
     text-align: center; padding: 60px 20px;
@@ -116,7 +121,7 @@
     .header h1 { font-size: 18px; }
     .card { padding: 14px 12px; }
     .interp p { font-size: 12px; }
-    .badges { gap: 4px; }
+    .summary-line { font-size: 13px; }
   }
 </style>
 </head>
@@ -147,7 +152,6 @@ async function fetchTrending() {
     const today = new Date();
     document.getElementById('dateLabel').textContent = today.toISOString().split('T')[0];
 
-    // 获取过去一周的热门项目
     const oneWeekAgo = new Date(today);
     oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
     const sinceStr = oneWeekAgo.toISOString().split('T')[0];
@@ -169,78 +173,79 @@ async function fetchTrending() {
       return;
     }
 
-    // 语言映射到中文
-    const langMap = {
-      'JavaScript': 'JavaScript', 'TypeScript': 'TypeScript', 'Python': 'Python',
-      'Go': 'Go', 'Rust': 'Rust', 'Java': 'Java', 'C': 'C', 'C++': 'C++',
-      'Ruby': 'Ruby', 'PHP': 'PHP', 'Swift': 'Swift', 'Kotlin': 'Kotlin',
-      'Jupyter Notebook': 'Jupyter Notebook', 'HTML': 'HTML', 'CSS': 'CSS',
-      'Shell': 'Shell', 'Markdown': 'Markdown', 'Crystal': 'Crystal',
-      'PowerShell': 'PowerShell', 'Vue': 'Vue'
-    };
-
-    // 根据项目特征生成中文解读
-    function generateDescription(repo) {
+    // 生成一句话总结 + 详细解读
+    function generateInsight(repo) {
       const name = repo.full_name;
-      const lang = repo.language || '未知';
+      const lang = repo.language || '';
+      const desc = (repo.description || '').trim();
+      const topics = repo.topics || [];
       const stars = repo.stargazers_count.toLocaleString();
       const forks = repo.forks_count;
-      const desc = repo.description || '';
-      const topics = repo.topics || [];
-      const isNew = (new Date(repo.created_at).getTime() > Date.now() - 86400000 * 14);
-      const hasManyStars = repo.stargazers_count > 10000;
-      const hasManyForks = forks > 1000;
-      const license = repo.license ? repo.license.spdx_id : '';
-      const openIssues = repo.open_issues_count;
       
-      let parts = [];
+      // ===== 一句话总结（基于描述 + 项目名 + 主题推断） =====
+      let summary = '';
       
-      // 开头：总体定位
       if (desc) {
-        parts.push(`${name} 是一款${lang}语言开发的开源项目。${desc}。`);
+        // 英文描述本身已经说明了项目用途，直接用作总结
+        summary = desc;
       } else {
-        parts.push(`${name} 是一个近期在 GitHub 上获得广泛关注的开源项目，使用 ${lang} 语言开发。`);
+        // 没有描述时，从项目名推断
+        const nameLower = name.toLowerCase();
+        if (nameLower.includes('db') || nameLower.includes('database') || nameLower.includes('sql') || nameLower.includes('redis')) {
+          summary = '一个数据库或数据存储相关的工具/库';
+        } else if (nameLower.includes('ai') || nameLower.includes('gpt') || nameLower.includes('llm') || nameLower.includes('chat') || nameLower.includes('agent')) {
+          summary = '一个 AI / 大语言模型相关的工具或框架';
+        } else if (nameLower.includes('cli') || nameLower.includes('terminal') || nameLower.includes('command')) {
+          summary = '一个命令行工具或终端应用';
+        } else if (nameLower.includes('ui') || nameLower.includes('component') || nameLower.includes('design') || nameLower.includes('css')) {
+          summary = '一个 UI 组件库或前端设计工具';
+        } else if (nameLower.includes('learn') || nameLower.includes('tutorial') || nameLower.includes('course') || nameLower.includes('guide')) {
+          summary = '一个编程学习教程或技术指南';
+        } else if (nameLower.includes('game') || nameLower.includes('engine')) {
+          summary = '一个游戏或游戏引擎';
+        } else if (nameLower.includes('framework') || nameLower.includes('sdk') || nameLower.includes('toolkit')) {
+          summary = '一个开发框架或工具集';
+        } else if (nameLower.includes('docker') || nameLower.includes('kubernetes') || nameLower.includes('k8s') || nameLower.includes('deploy')) {
+          summary = '一个 DevOps / 容器化部署工具';
+        } else if (nameLower.includes('test') || nameLower.includes('benchmark')) {
+          summary = '一个测试或性能基准工具';
+        } else {
+          summary = `一个使用 ${lang} 开发的开源项目`;
+        }
       }
       
-      // 热度说明
-      let heatDesc = `目前累计获得 ${stars} 颗星标`;
-      if (isNew) heatDesc += '，属于近期新晋热门项目';
-      if (hasManyStars && hasManyForks) heatDesc += '，社区关注度极高';
-      else if (hasManyStars) heatDesc += '，受到大量开发者关注';
-      heatDesc += `，已有 ${forks} 次仓库复刻`;
-      if (openIssues > 50) heatDesc += `，社区讨论活跃（${openIssues} 个待处理议题）`;
-      heatDesc += '。';
-      parts.push(heatDesc);
+      // ===== 详细解读 =====
+      let details = [];
+      
+      // 技术背景
+      if (lang) {
+        details.push(`采用 ${lang} 开发`);
+      }
+      
+      // 热度
+      if (stars) {
+        details.push(`当前获得 ${stars} 颗星标`);
+      }
+      if (forks > 500) {
+        details.push(`已被复刻 ${forks} 次`);
+      }
       
       // 主题标签
       if (topics.length > 0) {
-        const topicStr = topics.slice(0, 5).join('、');
-        parts.push(`该项目涉及的关键领域包括：${topicStr}。`);
+        details.push(`涉及 ${topics.slice(0, 3).join('、')} 等领域`);
       }
       
-      // 技术栈说明
-      if (lang !== 'unknown' && lang !== 'Markdown') {
-        parts.push(`技术上采用 ${lang} 作为主要编程语言`);
-        if (license) parts[parts.length-1] += `，采用 ${license} 开源协议`;
-        parts[parts.length-1] += '。';
-      }
-      
-      // 适用对象
-      parts.push(`适合对 ${topics.slice(0,2).join('、') || desc.slice(0,20)} 感兴趣的开发者关注和学习。`);
-      
-      return parts.join('');
+      return { summary, details: details.join('，') };
     }
 
     let html = '';
     repos.forEach((repo, i) => {
       const stars = repo.stargazers_count.toLocaleString();
       const forks = repo.forks_count.toLocaleString();
-      const lang = langMap[repo.language] || repo.language || '通用';
+      const lang = repo.language || '通用';
       const rank = String(i + 1).padStart(2, '0');
-      const topics = (repo.topics || []).slice(0, 4);
-      const desc = repo.description || '暂无详细描述';
-      const interpretation = generateDescription(repo);
-      const todayStars = repo.stargazers_count;
+      const topics = (repo.topics || []).slice(0, 5);
+      const insight = generateInsight(repo);
 
       html += `
         <div class="card">
@@ -249,18 +254,17 @@ async function fetchTrending() {
             <span class="rank">#${rank}</span>
           </div>
           <div class="badges">
-            <span class="badge badge-lang">${lang}</span>
+            <span class="badge">${lang}</span>
             <span class="badge badge-stars">${stars} ★</span>
             <span class="badge badge-forks">${forks} ⑂</span>
             ${topics.map(t => `<span class="badge badge-topic">${t}</span>`).join('')}
           </div>
-          <div class="desc">${desc}</div>
+          <div class="summary-line">${insight.summary}</div>
           <div class="interp">
-            <p>${interpretation}</p>
+            <p>${insight.details}</p>
           </div>
           <div class="stats">
-            <span>创建于 ${new Date(repo.created_at).toLocaleDateString('zh-CN')}</span>
-            <span>最后更新 ${new Date(repo.pushed_at).toLocaleDateString('zh-CN')}</span>
+            <span>更新于 ${new Date(repo.pushed_at).toLocaleDateString('zh-CN')}</span>
             <a class="repo-link" href="${repo.html_url}" target="_blank">查看仓库 →</a>
           </div>
         </div>
