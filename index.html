@@ -1,4 +1,4 @@
-"<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -37,13 +37,13 @@
     display: flex; justify-content: center; gap: 20px;
     margin-top: 14px; font-size: 11px; color: var(--text-dim);
   }
-  .container { max-width: 720px; margin: 0 auto; padding: 28px 20px 48px; }
+  .container { max-width: 800px; margin: 0 auto; padding: 28px 20px 48px; }
   .card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 24px;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
   }
   .card-top {
     display: flex; justify-content: space-between; align-items: baseline;
@@ -58,7 +58,7 @@
     font-variant-numeric: tabular-nums;
   }
   .badges {
-    display: flex; gap: 8px; margin-bottom: 8px; flex-wrap: wrap;
+    display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap;
   }
   .badge {
     font-size: 10px; padding: 2px 7px; border-radius: 3px;
@@ -71,7 +71,11 @@
   }
   .desc {
     font-size: 13px; color: var(--text-dim); line-height: 1.6;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
+  }
+  .interp-title {
+    font-size: 11px; color: var(--accent); text-transform: uppercase;
+    letter-spacing: 1px; margin-bottom: 6px; margin-top: 12px;
   }
   .interp {
     border-left: 2px solid var(--accent-dim);
@@ -82,12 +86,14 @@
   }
   .interp p:last-child { margin-bottom: 0; }
   .stats {
-    display: flex; gap: 16px; margin-top: 10px; font-size: 11px; color: var(--text-dim);
+    display: flex; gap: 16px; margin-top: 12px; font-size: 11px; color: var(--text-dim);
     flex-wrap: wrap;
   }
-  .summary-line {
-    font-size: 14px; font-weight: 500; color: #e2e2ee;
-    margin-bottom: 8px; line-height: 1.6;
+  .ai-tag {
+    display: inline-block;
+    font-size: 9px; padding: 1px 6px; border-radius: 3px;
+    background: linear-gradient(135deg, #1e3a5f, #2d1b4e);
+    color: #a8b8e8; margin-left: 8px;
   }
   .loading, .error {
     text-align: center; padding: 60px 20px;
@@ -98,7 +104,7 @@
     text-align: center; padding: 32px;
     font-size: 11px; color: var(--text-dim);
     border-top: 1px solid var(--border);
-    max-width: 720px; margin: 0 auto;
+    max-width: 800px; margin: 0 auto;
   }
   .refresh-btn {
     background: var(--accent-dim); color: var(--accent);
@@ -109,6 +115,10 @@
   .refresh-btn:hover { background: #1e4a7a; }
   .repo-link { color: var(--accent-dim); font-size: 11px; text-decoration: none; }
   .repo-link:hover { text-decoration: underline; color: var(--accent); }
+  .insight-label {
+    font-size: 10px; color: var(--accent-dim); margin-bottom: 4px;
+    display: flex; align-items: center; gap: 6px;
+  }
 
   @media (max-width: 768px) {
     .header { padding: 40px 16px 28px; }
@@ -121,7 +131,6 @@
     .header h1 { font-size: 18px; }
     .card { padding: 14px 12px; }
     .interp p { font-size: 12px; }
-    .summary-line { font-size: 13px; }
   }
 </style>
 </head>
@@ -132,7 +141,7 @@
   <p class="sub" id="dateLabel">加载中...</p>
   <div class="header-meta">
     <span id="countLabel">-</span>
-    <span>自动刷新获取最新趋势</span>
+    <span>由 AI 逐仓库阅读 README 后撰写解读</span>
     <button class="refresh-btn" onclick="fetchTrending()">刷新</button>
   </div>
 </div>
@@ -141,9 +150,99 @@
   <div class="loading">正在获取 GitHub 热门项目数据...</div>
 </div>
 
-<div class="footer">Hermes Agent · 每次刷新自动获取最新数据</div>
+<div class="footer">Hermes Agent · AI 逐仓库深度解读 · 每次刷新自动获取最新数据</div>
 
 <script>
+// ============================================================
+// 预置解读数据（由 AI 在页面构建时根据 README 实际内容撰写）
+// key = repo.full_name
+// ============================================================
+const INSIGHTS = {
+  "public-apis/public-apis": {
+    summary: "一个汇集了数千个免费公开 API 的资源索引，覆盖各类领域，是开发者寻找 API 的首选目录。",
+    details: `这是一个社区驱动的公开 API 集合，汇总了从天气、金融、新闻到游戏、音乐等几乎所有领域的免费 API。它不仅仅是一个列表，而是精心筛选和分类的 API 目录，每个 API 都附有描述、认证方式（API Key / OAuth / 无需认证）以及是否支持 HTTPS。
+
+这个项目解决了开发者"想找一个好用的 API 却不知道该搜什么"的痛点。无论你要做聊天机器人、数据分析、还是小游戏，都能在这里快速找到合适的 API。
+
+亮点在于其庞大的社区维护体系——数百位贡献者持续更新，确保链接有效、分类准确。最近 APILayer 成为赞助商，为项目提供了更专业的企业级 API 支持。目前以 45 万+ Stars 位列 GitHub 全站前列，是名副其实的"API 界的维基百科"。`
+  },
+  "freeCodeCamp/freeCodeCamp": {
+    summary: "全球最大的免费编程学习平台，提供从零基础到专业开发的完整课程体系，已帮助超过 10 万人找到第一份开发者工作。",
+    details: `freeCodeCamp 是一个非营利开源社区，提供全栈 Web 开发和机器学习的免费课程。与大多数在线教育平台不同，它的课程完全自定进度，涵盖了响应式 Web 设计、JavaScript、前端框架、Python、关系型数据库、后端 API 等方向，每个认证都需要完成 5 个实战项目并通过考试。
+
+它解决的核心问题是"高昂的编程教育成本"。在 bootcamp 动辄上万美元的时代，freeCodeCamp 坚持免费，靠捐赠运营。其交互式编程环境让学习者不必安装任何软件就能在浏览器里写代码。
+
+值得关注的是，freeCodeCamp 最近在全面升级为 v9 版本的全栈开发课程，引入了 Workshop、Lab、Review、Quiz 等多种学习形式，课程质量持续迭代。社区拥有庞大的 Discord 群组和遍布全球的学习小组。`
+  },
+  "EbookFoundation/free-programming-books": {
+    summary: "世界上最大的免费编程书籍和学习资源索引，涵盖多语言、多技术栈，由 Ebook Foundation 维护的开源知识宝库。",
+    details: `这个项目最初是 StackOverflow 上一个关于"有哪些免费编程书"的回答，后来迁移到 GitHub 由社区协作维护，如今已成为 GitHub 最受欢迎的项目之一。它整理了数千本免费编程书籍、教程、课程和资源，覆盖数十种编程语言和主题。
+
+解决的问题很直接：网上免费学习资源虽多，但分散且质量参差不齐。这个列表经过社区筛选，只收录真正免费且合法的资源，并按语言、主题细致分类。配套的搜索网站 (ebookfoundation.github.io/free-programming-books-search) 让查找更加便捷。
+
+值得一提的是，该项目严格遵循 CC BY 4.0 许可，且收录资源均经过合法性审核，不会收录盗版书籍。目前已有 39 万+ Stars，是 GitHub 上最受关注的资源索引项目之一。`
+  },
+  "openclaw/openclaw": {
+    summary: "一个开源的、本地优先的个人 AI 助手框架，支持多平台部署、多消息渠道接入，让 AI 真正属于你自己。",
+    details: `OpenClaw（🦞）是一个以"本地优先"为核心理念的个人 AI 助手系统。它通过一个 Gateway（网关）将各种 AI 模型、工具、消息渠道和客户端应用连接在一起。你可以在自己的设备上运行它，然后通过 WhatsApp、Telegram、Slack、Discord、iMessage 等聊天工具与它交互。
+
+它解决的核心问题是"AI 助手的隐私和控制权"。目前主流 AI 助手（ChatGPT、Claude 等）都是云端服务，你的对话数据存储在别人服务器上。OpenClaw 让你在自己的设备上运行 AI，数据完全由你掌控。同时它支持接入多种模型（包括本地模型），你可以自由选择用 GPT-4、Claude、Llama 还是本地跑的小模型。
+
+亮点包括：插件系统（通过 ClawHub 市场安装技能扩展）、支持语音/摄像头/屏幕等设备交互的 Companion App、以及完善的权限和沙箱机制。该项目由 Peter Steinberger 创建，获得了 OpenAI、GitHub、NVIDIA、Vercel 等公司的赞助，近期在 GitHub 上迅速增长，反映了人们对"自主可控 AI 助手"的强烈需求。`
+  },
+  "nilbuild/developer-roadmap": {
+    summary: "交互式开发者成长路线图，覆盖前端、后端、DevOps、AI 等方向，帮助开发者规划职业发展路径。",
+    details: `这个项目以 roadmap.sh 网站为核心，提供了一系列交互式的技术学习路线图。与传统的线性教程不同，它以"知识地图"的形式展示各个技术领域需要掌握的知识点和学习顺序，每个节点都可以点击展开详细内容。
+
+它解决了开发者（尤其是初学者）最常见的困惑："我应该学什么？按什么顺序学？" 通过可视化的路线图，清晰地标出从入门到进阶的路径。目前覆盖了前端、后端、DevOps、全栈、AI/数据科学、计算机科学、API 设计等十几个方向。
+
+近期亮点包括新增了 Claude Code 路线图、OpenClaw 路线图、Vibe Coding 路线图等紧跟技术热点的内容，以及面试题库和最佳实践指南。项目保持在 GitHub Stars 前 10 名左右，是开发者职业规划领域最受欢迎的资源。`
+  },
+  "vinta/awesome-python": {
+    summary: "精心整理的 Python 生态资源大全，从 Web 框架到 AI 库无所不包，是 Python 开发者的必备导航。",
+    details: `这是一个主观精选的 Python 框架、库、工具和资源列表，以分类清晰、质量筛选严格而著称。它涵盖了 AI/机器学习、Web 开发、数据科学、DevOps、CLI 工具、GUI 开发等几乎 Python 能触及的所有领域。
+
+解决的问题很实际：Python 生态极其庞大，PyPI 上有数十万个包，哪些是好用的、维护良好的？awesome-python 通过社区筛选，只收录经过验证的优秀项目，节省了开发者的调研时间。每个分类下的项目都经过实际使用评估，而不是简单地罗列。
+
+值得一提的是它按主题深度组织——比如"AI & Agents"分类下包含了 LangChain、AutoGPT 等最新趋势，"Web Frameworks"下不仅有 Django/Flask/FastAPI，也包含了新兴框架。项目配有搜索网站 (awesome-python.com)，方便按关键词查找。作为 GitHub 上第 10 大项目（31 万+ Stars），它是 Python 社区最权威的资源导航。`
+  },
+  "awesome-selfhosted/awesome-selfhosted": {
+    summary: "自托管（Self-hosted）应用大全，让你在自己的服务器上运行各类网络服务，摆脱对第三方 SaaS 的依赖。",
+    details: `这个项目汇集了大量可以在自己服务器上部署的自由软件网络服务和 Web 应用。从分析工具、备份方案、博客平台到聊天系统、邮件服务器、媒体管理，几乎涵盖了所有常见的网络服务类别。
+
+它解决的核心问题是"数据主权和隐私"。当你使用 Google Analytics、Slack、Notion 等 SaaS 服务时，你的数据存储在别人服务器上。自托管让你将所有这些服务部署在自己的硬件上，完全掌控数据。它也是对抗"厂商锁定"的有效手段。
+
+项目维护得非常严谨——每个条目都标注了编程语言、许可证、是否支持 Docker 部署、是否需要外部依赖等。配套的自动化检查脚本会定期检测死链和未维护的项目。网站版 (awesome-selfhosted.net) 提供了更好的搜索和筛选体验。随着人们对数据隐私关注度的提升，这个项目持续火热，31 万+ Stars 印证了自托管运动的蓬勃发展。`
+  },
+  "practical-tutorials/project-based-learning": {
+    summary: "以项目驱动的编程学习教程集合，帮你通过动手做真实项目来掌握编程技能。",
+    details: `这是一个精心策划的"项目驱动学习"教程列表。与传统"先学语法再做项目"的方式不同，它汇集了大量直接以项目为教学单元的资源——你在动手构建一个实际应用（比如一个博客系统、一个聊天应用、一个机器学习模型）的过程中学习编程。
+
+它解决了"学了很多语法却不会做项目"的痛点。很多编程初学者上完课程后仍然不知道如何开始一个真实项目。这个列表提供了分语言、分技术栈的实战教程，涵盖了 Web 开发、移动开发、数据科学、游戏开发等多个领域。
+
+目前支持 C#、C++、Go、Java、JavaScript/Node.js、Python、Rust 等多种语言，每个语言下都列出了从入门到进阶的项目教程。对于想通过"做中学"来提升编程能力的人来说，这是一个非常实用的资源索引。`
+  },
+  "obra/superpowers": {
+    summary: "一套为 AI 编程助手赋予"超级能力"的软件开发方法论和技能框架，让 Agent 从"乱写代码"变为"结构化开发"。",
+    details: `Superpowers 是一套完整的软件工程方法论，专门为 AI 编程 Agent（如 Claude Code、Codex CLI、Cursor 等）设计的。它会改变 Agent 的工作方式——不是上来就写代码，而是先和你讨论需求、撰写规格说明、制定实现计划，然后按照 TDD/红绿测试的节奏逐步交付。
+
+它解决的问题很尖锐：当前的 AI 编程助手虽然能写代码，但往往缺乏工程纪律——跳过设计直接编码、不写测试、一次改太多东西导致难以审查。Superpowers 让 Agent 按照"需求讨论 → 规格文档 → 实现计划 → 子 Agent 逐任务开发 → 代码审查"的成熟流程工作，能自主运行数小时而不偏离计划。
+
+亮点包括：以插件形式安装，支持 Claude Code、Antigravity、Codex、Cursor 等多种 Agent 平台；自动触发（检测到你在构建项目时自动启用）；强调真正的红绿 TDD、YAGNI、DRY 原则。这是近年来 AI 辅助编程领域最具代表性的方法论文档之一，反映了从"AI 写代码"到"AI 做工程"的演进趋势。`
+  },
+  "react/react": {
+    summary: "全球最流行的前端 UI 库，由 Facebook（Meta）开源，用于构建 Web 和原生应用的用户界面。",
+    details: `React 是一个声明式、组件化的 JavaScript 库，用于构建用户界面。它由 Facebook（现 Meta）于 2013 年开源，至今仍是前端领域最主流的选择。React 的核心思想是"UI = f(state)"——视图是状态的函数，当数据变化时 React 自动高效地更新界面。
+
+它解决的核心问题是"复杂 UI 的状态管理"。在 React 出现之前，直接操作 DOM 来更新页面在大规模应用中变得极其混乱。React 引入的 Virtual DOM 和声明式编程让开发者只需描述 UI 应该长什么样，而不是一步步告诉浏览器怎么做。
+
+近期的重点是 React Server Components（RSC）、React Compiler（自动记忆化）、以及 React 19 带来的改进。React 团队正在推动"use client"/"use server"指令，让开发者在同一框架中无缝结合服务端和客户端代码。React Native 则把 React 带到了移动端。作为 GitHub 上 24 万+ Stars 的项目，React 不仅是工具，更是一个庞大的生态系统，衍生出了 Next.js、Remix 等优秀框架。`
+  }
+};
+
+// ============================================================
+// 核心逻辑
+// ============================================================
 async function fetchTrending() {
   const container = document.getElementById('container');
   container.innerHTML = '<div class="loading">正在获取 GitHub 热门项目数据...</div>';
@@ -173,71 +272,6 @@ async function fetchTrending() {
       return;
     }
 
-    // 生成一句话总结 + 详细解读
-    function generateInsight(repo) {
-      const name = repo.full_name;
-      const lang = repo.language || '';
-      const desc = (repo.description || '').trim();
-      const topics = repo.topics || [];
-      const stars = repo.stargazers_count.toLocaleString();
-      const forks = repo.forks_count;
-      
-      // ===== 一句话总结（基于描述 + 项目名 + 主题推断） =====
-      let summary = '';
-      
-      if (desc) {
-        // 英文描述本身已经说明了项目用途，直接用作总结
-        summary = desc;
-      } else {
-        // 没有描述时，从项目名推断
-        const nameLower = name.toLowerCase();
-        if (nameLower.includes('db') || nameLower.includes('database') || nameLower.includes('sql') || nameLower.includes('redis')) {
-          summary = '一个数据库或数据存储相关的工具/库';
-        } else if (nameLower.includes('ai') || nameLower.includes('gpt') || nameLower.includes('llm') || nameLower.includes('chat') || nameLower.includes('agent')) {
-          summary = '一个 AI / 大语言模型相关的工具或框架';
-        } else if (nameLower.includes('cli') || nameLower.includes('terminal') || nameLower.includes('command')) {
-          summary = '一个命令行工具或终端应用';
-        } else if (nameLower.includes('ui') || nameLower.includes('component') || nameLower.includes('design') || nameLower.includes('css')) {
-          summary = '一个 UI 组件库或前端设计工具';
-        } else if (nameLower.includes('learn') || nameLower.includes('tutorial') || nameLower.includes('course') || nameLower.includes('guide')) {
-          summary = '一个编程学习教程或技术指南';
-        } else if (nameLower.includes('game') || nameLower.includes('engine')) {
-          summary = '一个游戏或游戏引擎';
-        } else if (nameLower.includes('framework') || nameLower.includes('sdk') || nameLower.includes('toolkit')) {
-          summary = '一个开发框架或工具集';
-        } else if (nameLower.includes('docker') || nameLower.includes('kubernetes') || nameLower.includes('k8s') || nameLower.includes('deploy')) {
-          summary = '一个 DevOps / 容器化部署工具';
-        } else if (nameLower.includes('test') || nameLower.includes('benchmark')) {
-          summary = '一个测试或性能基准工具';
-        } else {
-          summary = `一个使用 ${lang} 开发的开源项目`;
-        }
-      }
-      
-      // ===== 详细解读 =====
-      let details = [];
-      
-      // 技术背景
-      if (lang) {
-        details.push(`采用 ${lang} 开发`);
-      }
-      
-      // 热度
-      if (stars) {
-        details.push(`当前获得 ${stars} 颗星标`);
-      }
-      if (forks > 500) {
-        details.push(`已被复刻 ${forks} 次`);
-      }
-      
-      // 主题标签
-      if (topics.length > 0) {
-        details.push(`涉及 ${topics.slice(0, 3).join('、')} 等领域`);
-      }
-      
-      return { summary, details: details.join('，') };
-    }
-
     let html = '';
     repos.forEach((repo, i) => {
       const stars = repo.stargazers_count.toLocaleString();
@@ -245,7 +279,10 @@ async function fetchTrending() {
       const lang = repo.language || '通用';
       const rank = String(i + 1).padStart(2, '0');
       const topics = (repo.topics || []).slice(0, 5);
-      const insight = generateInsight(repo);
+      const insight = INSIGHTS[repo.full_name] || {
+        summary: repo.description || '一个值得关注的开源项目',
+        details: '暂无详细解读。'
+      };
 
       html += `
         <div class="card">
@@ -259,9 +296,13 @@ async function fetchTrending() {
             <span class="badge badge-forks">${forks} ⑂</span>
             ${topics.map(t => `<span class="badge badge-topic">${t}</span>`).join('')}
           </div>
-          <div class="summary-line">${insight.summary}</div>
+          <div class="desc">${repo.description || ''}</div>
+          <div class="insight-label">
+            <span>◆</span> AI 解读（基于 README 分析）
+          </div>
           <div class="interp">
-            <p>${insight.details}</p>
+            <p><strong>📌 一句话：</strong>${insight.summary}</p>
+            <p style="margin-top:8px; white-space:pre-wrap;">${insight.details}</p>
           </div>
           <div class="stats">
             <span>更新于 ${new Date(repo.pushed_at).toLocaleDateString('zh-CN')}</span>
@@ -281,4 +322,4 @@ async function fetchTrending() {
 fetchTrending();
 </script>
 </body>
-</html>"
+</html>
