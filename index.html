@@ -113,92 +113,13 @@
 // 预置解读数据（由 update_trending.py 根据缓存生成）
 // ============================================================
 const INSIGHTS = {
-  "public-apis/public-apis": {
-    summary: `一个汇集了数千个免费公开 API 的资源索引，覆盖各类领域，是开发者寻找 API 的首选目录。`,
-    details: `这是一个社区驱动的公开 API 集合，汇总了从天气、金融、新闻到游戏、音乐等几乎所有领域的免费 API。它不仅仅是一个列表，而是精心筛选和分类的 API 目录，每个 API 都附有描述、认证方式（API Key / OAuth / 无需认证）以及是否支持 HTTPS。
 
-这个项目解决了开发者"想找一个好用的 API 却不知道该搜什么"的痛点。无论你要做聊天机器人、数据分析、还是小游戏，都能在这里快速找到合适的 API。
-
-亮点在于其庞大的社区维护体系——数百位贡献者持续更新，确保链接有效、分类准确。最近 APILayer 成为赞助商，为项目提供了更专业的企业级 API 支持。目前以 45 万+ Stars 位列 GitHub 全站前列，是名副其实的"API 界的维基百科"。`
-  },
-  "freeCodeCamp/freeCodeCamp": {
-    summary: `全球最大的免费编程学习平台，提供从零基础到专业开发的完整课程体系，已帮助超过 10 万人找到第一份开发者工作。`,
-    details: `freeCodeCamp 是一个非营利开源社区，提供全栈 Web 开发和机器学习的免费课程。与大多数在线教育平台不同，它的课程完全自定进度，涵盖了响应式 Web 设计、JavaScript、前端框架、Python、关系型数据库、后端 API 等方向，每个认证都需要完成 5 个实战项目并通过考试。
-
-它解决的核心问题是"高昂的编程教育成本"。在 bootcamp 动辄上万美元的时代，freeCodeCamp 坚持免费，靠捐赠运营。其交互式编程环境让学习者不必安装任何软件就能在浏览器里写代码。
-
-值得关注的是，freeCodeCamp 最近在全面升级为 v9 版本的全栈开发课程，引入了 Workshop、Lab、Review、Quiz 等多种学习形式，课程质量持续迭代。社区拥有庞大的 Discord 群组和遍布全球的学习小组。`
-  },
-  "EbookFoundation/free-programming-books": {
-    summary: `世界上最大的免费编程书籍和学习资源索引，涵盖多语言、多技术栈，由 Ebook Foundation 维护的开源知识宝库。`,
-    details: `这个项目最初是 StackOverflow 上一个关于"有哪些免费编程书"的回答，后来迁移到 GitHub 由社区协作维护，如今已成为 GitHub 最受欢迎的项目之一。它整理了数千本免费编程书籍、教程、课程和资源，覆盖数十种编程语言和主题。
-
-解决的问题很直接：网上免费学习资源虽多，但分散且质量参差不齐。这个列表经过社区筛选，只收录真正免费且合法的资源，并按语言、主题细致分类。配套的搜索网站 (ebookfoundation.github.io/free-programming-books-search) 让查找更加便捷。
-
-值得一提的是，该项目严格遵循 CC BY 4.0 许可，且收录资源均经过合法性审核，不会收录盗版书籍。目前已有 39 万+ Stars，是 GitHub 上最受关注的资源索引项目之一。`
-  },
-  "openclaw/openclaw": {
-    summary: `一个开源的、本地优先的个人 AI 助手框架，支持多平台部署、多消息渠道接入，让 AI 真正属于你自己。`,
-    details: `OpenClaw（🦞）是一个以"本地优先"为核心理念的个人 AI 助手系统。它通过一个 Gateway（网关）将各种 AI 模型、工具、消息渠道和客户端应用连接在一起。你可以在自己的设备上运行它，然后通过 WhatsApp、Telegram、Slack、Discord、iMessage 等聊天工具与它交互。
-
-它解决的核心问题是"AI 助手的隐私和控制权"。目前主流 AI 助手（ChatGPT、Claude 等）都是云端服务，你的对话数据存储在别人服务器上。OpenClaw 让你在自己的设备上运行 AI，数据完全由你掌控。同时它支持接入多种模型（包括本地模型），你可以自由选择用 GPT-4、Claude、Llama 还是本地跑的小模型。
-
-亮点包括：插件系统（通过 ClawHub 市场安装技能扩展）、支持语音/摄像头/屏幕等设备交互的 Companion App、以及完善的权限和沙箱机制。该项目由 Peter Steinberger 创建，获得了 OpenAI、GitHub、NVIDIA、Vercel 等公司的赞助，近期在 GitHub 上迅速增长，反映了人们对"自主可控 AI 助手"的强烈需求。`
-  },
-  "nilbuild/developer-roadmap": {
-    summary: `交互式开发者成长路线图，覆盖前端、后端、DevOps、AI 等方向，帮助开发者规划职业发展路径。`,
-    details: `这个项目以 roadmap.sh 网站为核心，提供了一系列交互式的技术学习路线图。与传统的线性教程不同，它以"知识地图"的形式展示各个技术领域需要掌握的知识点和学习顺序，每个节点都可以点击展开详细内容。
-
-它解决了开发者（尤其是初学者）最常见的困惑："我应该学什么？按什么顺序学？" 通过可视化的路线图，清晰地标出从入门到进阶的路径。目前覆盖了前端、后端、DevOps、全栈、AI/数据科学、计算机科学、API 设计等十几个方向。
-
-近期亮点包括新增了 Claude Code 路线图、OpenClaw 路线图、Vibe Coding 路线图等紧跟技术热点的内容，以及面试题库和最佳实践指南。项目保持在 GitHub Stars 前 10 名左右，是开发者职业规划领域最受欢迎的资源。`
-  },
-  "vinta/awesome-python": {
-    summary: `精心整理的 Python 生态资源大全，从 Web 框架到 AI 库无所不包，是 Python 开发者的必备导航。`,
-    details: `这是一个主观精选的 Python 框架、库、工具和资源列表，以分类清晰、质量筛选严格而著称。它涵盖了 AI/机器学习、Web 开发、数据科学、DevOps、CLI 工具、GUI 开发等几乎 Python 能触及的所有领域。
-
-解决的问题很实际：Python 生态极其庞大，PyPI 上有数十万个包，哪些是好用的、维护良好的？awesome-python 通过社区筛选，只收录经过验证的优秀项目，节省了开发者的调研时间。每个分类下的项目都经过实际使用评估，而不是简单地罗列。
-
-值得一提的是它按主题深度组织——比如"AI & Agents"分类下包含了 LangChain、AutoGPT 等最新趋势，"Web Frameworks"下不仅有 Django/Flask/FastAPI，也包含了新兴框架。项目配有搜索网站 (awesome-python.com)，方便按关键词查找。作为 GitHub 上第 10 大项目（31 万+ Stars），它是 Python 社区最权威的资源导航。`
-  },
-  "awesome-selfhosted/awesome-selfhosted": {
-    summary: `自托管（Self-hosted）应用大全，让你在自己的服务器上运行各类网络服务，摆脱对第三方 SaaS 的依赖。`,
-    details: `这个项目汇集了大量可以在自己服务器上部署的自由软件网络服务和 Web 应用。从分析工具、备份方案、博客平台到聊天系统、邮件服务器、媒体管理，几乎涵盖了所有常见的网络服务类别。
-
-它解决的核心问题是"数据主权和隐私"。当你使用 Google Analytics、Slack、Notion 等 SaaS 服务时，你的数据存储在别人服务器上。自托管让你将所有这些服务部署在自己的硬件上，完全掌控数据。它也是对抗"厂商锁定"的有效手段。
-
-项目维护得非常严谨——每个条目都标注了编程语言、许可证、是否支持 Docker 部署、是否需要外部依赖等。配套的自动化检查脚本会定期检测死链和未维护的项目。网站版 (awesome-selfhosted.net) 提供了更好的搜索和筛选体验。随着人们对数据隐私关注度的提升，这个项目持续火热，31 万+ Stars 印证了自托管运动的蓬勃发展。`
-  },
-  "practical-tutorials/project-based-learning": {
-    summary: `以项目驱动的编程学习教程集合，帮你通过动手做真实项目来掌握编程技能。`,
-    details: `这是一个精心策划的"项目驱动学习"教程列表。与传统"先学语法再做项目"的方式不同，它汇集了大量直接以项目为教学单元的资源——你在动手构建一个实际应用（比如一个博客系统、一个聊天应用、一个机器学习模型）的过程中学习编程。
-
-它解决了"学了很多语法却不会做项目"的痛点。很多编程初学者上完课程后仍然不知道如何开始一个真实项目。这个列表提供了分语言、分技术栈的实战教程，涵盖了 Web 开发、移动开发、数据科学、游戏开发等多个领域。
-
-目前支持 C#、C++、Go、Java、JavaScript/Node.js、Python、Rust 等多种语言，每个语言下都列出了从入门到进阶的项目教程。对于想通过"做中学"来提升编程能力的人来说，这是一个非常实用的资源索引。`
-  },
-  "obra/superpowers": {
-    summary: `一套为 AI 编程助手赋予"超级能力"的软件开发方法论和技能框架，让 Agent 从"乱写代码"变为"结构化开发"。`,
-    details: `Superpowers 是一套完整的软件工程方法论，专门为 AI 编程 Agent（如 Claude Code、Codex CLI、Cursor 等）设计的。它会改变 Agent 的工作方式——不是上来就写代码，而是先和你讨论需求、撰写规格说明、制定实现计划，然后按照 TDD/红绿测试的节奏逐步交付。
-
-它解决的问题很尖锐：当前的 AI 编程助手虽然能写代码，但往往缺乏工程纪律——跳过设计直接编码、不写测试、一次改太多东西导致难以审查。Superpowers 让 Agent 按照"需求讨论 → 规格文档 → 实现计划 → 子 Agent 逐任务开发 → 代码审查"的成熟流程工作，能自主运行数小时而不偏离计划。
-
-亮点包括：以插件形式安装，支持 Claude Code、Antigravity、Codex、Cursor 等多种 Agent 平台；自动触发（检测到你在构建项目时自动启用）；强调真正的红绿 TDD、YAGNI、DRY 原则。这是近年来 AI 辅助编程领域最具代表性的方法论文档之一，反映了从"AI 写代码"到"AI 做工程"的演进趋势。`
-  },
-  "react/react": {
-    summary: `全球最流行的前端 UI 库，由 Facebook（Meta）开源，用于构建 Web 和原生应用的用户界面。`,
-    details: `React 是一个声明式、组件化的 JavaScript 库，用于构建用户界面。它由 Facebook（现 Meta）于 2013 年开源，至今仍是前端领域最主流的选择。React 的核心思想是"UI = f(state)"——视图是状态的函数，当数据变化时 React 自动高效地更新界面。
-
-它解决的核心问题是"复杂 UI 的状态管理"。在 React 出现之前，直接操作 DOM 来更新页面在大规模应用中变得极其混乱。React 引入的 Virtual DOM 和声明式编程让开发者只需描述 UI 应该长什么样，而不是一步步告诉浏览器怎么做。
-
-近期的重点是 React Server Components（RSC）、React Compiler（自动记忆化）、以及 React 19 带来的改进。React 团队正在推动"use client"/"use server"指令，让开发者在同一框架中无缝结合服务端和客户端代码。React Native 则把 React 带到了移动端。作为 GitHub 上 24 万+ Stars 的项目，React 不仅是工具，更是一个庞大的生态系统，衍生出了 Next.js、Remix 等优秀框架。`
-  }
 };
 
 // ============================================================
 // 仓库数据
 // ============================================================
-const REPOS = [{"name": "public-apis/public-apis", "stars": "454,696", "forks": "50,179", "lang": "Python", "rank": "01", "topics": ["api", "apis", "dataset", "development", "free"], "desc": "A collective list of free APIs", "url": "https://github.com/public-apis/public-apis", "pushed": "2026-08-05T06:58:49Z", "interpreted": true}, {"name": "freeCodeCamp/freeCodeCamp", "stars": "453,593", "forks": "45,886", "lang": "TypeScript", "rank": "02", "topics": ["careers", "certification", "community", "curriculum", "d3"], "desc": "freeCodeCamp.org's open-source codebase and curriculum. Learn math, programming, and computer science for free.", "url": "https://github.com/freeCodeCamp/freeCodeCamp", "pushed": "2026-08-06T17:16:48Z", "interpreted": true}, {"name": "EbookFoundation/free-programming-books", "stars": "393,873", "forks": "66,667", "lang": "Python", "rank": "03", "topics": ["books", "education", "hacktoberfest", "list", "resource"], "desc": ":books: Freely available programming books", "url": "https://github.com/EbookFoundation/free-programming-books", "pushed": "2026-08-06T13:01:39Z", "interpreted": true}, {"name": "openclaw/openclaw", "stars": "385,369", "forks": "81,017", "lang": "TypeScript", "rank": "04", "topics": ["ai", "assistant", "crustacean", "molty", "openclaw"], "desc": "Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞 ", "url": "https://github.com/openclaw/openclaw", "pushed": "2026-08-06T18:33:24Z", "interpreted": true}, {"name": "nilbuild/developer-roadmap", "stars": "363,783", "forks": "44,743", "lang": "TypeScript", "rank": "05", "topics": ["angular-roadmap", "backend-roadmap", "blockchain-roadmap", "computer-science", "dba-roadmap"], "desc": "Interactive roadmaps, guides and other educational content to help developers grow in their careers.", "url": "https://github.com/nilbuild/developer-roadmap", "pushed": "2026-08-06T16:55:47Z", "interpreted": true}, {"name": "vinta/awesome-python", "stars": "312,540", "forks": "28,469", "lang": "Python", "rank": "06", "topics": ["awesome", "collections", "python", "python-frameworks", "python-libraries"], "desc": "An opinionated list of Python frameworks, libraries, tools, and resources", "url": "https://github.com/vinta/awesome-python", "pushed": "2026-08-05T06:11:04Z", "interpreted": true}, {"name": "awesome-selfhosted/awesome-selfhosted", "stars": "311,016", "forks": "14,586", "lang": "通用", "rank": "07", "topics": ["awesome", "awesome-list", "cloud", "free-software", "hosting"], "desc": "A list of Free Software network services and web applications which can be hosted on your own servers", "url": "https://github.com/awesome-selfhosted/awesome-selfhosted", "pushed": "2026-08-04T19:13:06Z", "interpreted": true}, {"name": "practical-tutorials/project-based-learning", "stars": "276,873", "forks": "35,667", "lang": "Python", "rank": "08", "topics": ["beginner-project", "cpp", "golang", "javascript", "project"], "desc": "Curated list of project-based tutorials", "url": "https://github.com/practical-tutorials/project-based-learning", "pushed": "2026-08-03T07:46:08Z", "interpreted": true}, {"name": "obra/superpowers", "stars": "267,977", "forks": "23,946", "lang": "Shell", "rank": "09", "topics": ["ai", "brainstorming", "coding", "obra", "sdlc"], "desc": "An agentic skills framework & software development methodology that works.", "url": "https://github.com/obra/superpowers", "pushed": "2026-08-06T06:17:22Z", "interpreted": true}, {"name": "react/react", "stars": "247,067", "forks": "51,198", "lang": "JavaScript", "rank": "10", "topics": ["declarative", "frontend", "javascript", "library", "react"], "desc": "The library for web and native user interfaces.", "url": "https://github.com/react/react", "pushed": "2026-08-06T12:44:05Z", "interpreted": true}];
+const REPOS = [{"name": "firecrawl/anydoc", "stars": "7,801", "forks": "355", "lang": "Rust", "rank": "01", "topics": [], "desc": "Convert Word, PowerPoint, Excel, OpenDocument, RTF, EPUB, CSV, and PDF to clean Markdown. Built in Rust, with Node.js and Python bindings.", "url": "https://github.com/firecrawl/anydoc", "pushed": "2026-08-06T19:29:58Z", "interpreted": false}, {"name": "FareedKhan-dev/kimi-k3-in-c", "stars": "2,787", "forks": "463", "lang": "C", "rank": "02", "topics": ["avx2", "c99", "cpu-inference", "deep-learning", "from-scratch"], "desc": "A 2.78-trillion-parameter Kimi K3 running inference on a single CPU in 8.24 GB of RAM. Portable C99: no BLAS, no framework, no GPU.", "url": "https://github.com/FareedKhan-dev/kimi-k3-in-c", "pushed": "2026-08-06T14:48:00Z", "interpreted": false}, {"name": "imsai-sh/zhuzhiliao", "stars": "2,288", "forks": "292", "lang": "HTML", "rank": "03", "topics": [], "desc": "竹知了 —— 一转就哇哇叫的传统玩具，Web 模拟版。零依赖单文件，真实录音采样，移动端优先。", "url": "https://github.com/imsai-sh/zhuzhiliao", "pushed": "2026-08-04T11:33:10Z", "interpreted": false}, {"name": "thebuggeddev/anatomy", "stars": "1,835", "forks": "527", "lang": "TypeScript", "rank": "04", "topics": [], "desc": "An interactive 3D human anatomy explorer built using threejs with GPT 5.6 Sol", "url": "https://github.com/thebuggeddev/anatomy", "pushed": "2026-08-02T11:29:29Z", "interpreted": false}, {"name": "DannyMac180/sol-advisor", "stars": "1,679", "forks": "122", "lang": "Shell", "rank": "05", "topics": [], "desc": "Codex-native architect orchestration with Luna and Terra implementation lanes and mandatory fresh Sol review.", "url": "https://github.com/DannyMac180/sol-advisor", "pushed": "2026-08-04T10:20:51Z", "interpreted": false}, {"name": "KKKKhazix/human-writing", "stars": "1,546", "forks": "134", "lang": "Python", "rank": "06", "topics": ["agent-skills", "chinese-writing", "creative-writing", "writing-skill"], "desc": "让 AI 写的中文读起来像一个具体的人在说话。通用创作与改稿 Skill，开箱即用。", "url": "https://github.com/KKKKhazix/human-writing", "pushed": "2026-08-05T10:38:38Z", "interpreted": false}, {"name": "Binaryify/open-kimi-ppt-skill", "stars": "1,278", "forks": "342", "lang": "Python", "rank": "07", "topics": [], "desc": "非官方 Kimi Slides Skill：让 AI Agent 生成可编辑 PPTD + PPTX，并附带本地浏览器编辑器 Unofficial Kimi Slides skill for AI agents — generate editable PPTD + PPTX with a local browser editor", "url": "https://github.com/Binaryify/open-kimi-ppt-skill", "pushed": "2026-08-06T14:33:54Z", "interpreted": false}, {"name": "Accio-org/RealReplicaBench", "stars": "1,034", "forks": "74", "lang": "HTML", "rank": "08", "topics": [], "desc": "RealReplicaBench: Benchmarking Long-Horizon Agents in High-Fidelity, Stateful, and Reproducible Replicas of Real Online Services", "url": "https://github.com/Accio-org/RealReplicaBench", "pushed": "2026-08-06T10:48:17Z", "interpreted": false}, {"name": "ZzzLc0405/photo-abstract-editorial", "stars": "917", "forks": "49", "lang": "通用", "rank": "09", "topics": [], "desc": "", "url": "https://github.com/ZzzLc0405/photo-abstract-editorial", "pushed": "2026-08-04T09:38:25Z", "interpreted": false}, {"name": "x4gKing/3x-ui-multi", "stars": "863", "forks": "2,351", "lang": "JavaScript", "rank": "10", "topics": [], "desc": "", "url": "https://github.com/x4gKing/3x-ui-multi", "pushed": "2026-08-01T12:40:28Z", "interpreted": false}];
 
 // ============================================================
 // 渲染页面
