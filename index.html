@@ -113,13 +113,92 @@
 // 预置解读数据（由 update_trending.py 根据缓存生成）
 // ============================================================
 const INSIGHTS = {
+  "firecrawl/anydoc": {
+    summary: `由 Firecrawl 开发的高性能文档转 Markdown 库，支持 Word、PPT、PDF 等十余种格式，毫秒级转换，为 LLM 输入准备数据。`,
+    details: `这是一个用 Rust 编写的文档转换库，能把 Word、PowerPoint、Excel、PDF、EPUB、CSV 等十余种办公文档格式转换成干净的 GitHub Flavored Markdown。由知名的网页抓取服务 Firecrawl 开发，也是其 Parse API 的底层引擎。
 
+它解决的核心问题是「AI 无法直接读取办公文档」。大语言模型需要纯文本或 Markdown 输入，而现实世界的数据大量存储在 .docx、.pptx、.pdf 中。anydoc 让开发者可以在毫秒级把这些文档转换成 LLM-ready 的格式。
+
+亮点包括：同时提供 Node.js、Python、浏览器（WASM）绑定，浏览器版文件不会离开本机；支持 CLI 命令和 Agent Skill（一行 npx 即可安装），让 Claude Code、Codex 等 AI 编码助手直接读取文档；单次转换在个位数毫秒内完成。`
+  },
+  "FareedKhan-dev/kimi-k3-in-c": {
+    summary: `纯 C99 实现的 Kimi K3 推理引擎，2.78 万亿参数模型仅用 8.24 GB 内存 + 单 CPU 就能运行，体积仅 176 KB。`,
+    details: `这个项目用纯 C99（无任何第三方库依赖）实现了 Moonshot AI 的 Kimi K3 大模型的推理引擎。参数规模 2.78 万亿，但峰值内存仅 8.24 GB，可以在普通笔记本电脑上运行。整个引擎仅 176 KB。
+
+它解决的核心问题是「大模型推理的硬件门槛」。目前运行大模型通常需要高端 GPU，显存成本极高。这个项目证明了一个 2.78T 参数模型可以在没有 BLAS、没有框架、没有 GPU 的普通 CPU 上运行，虽然速度较慢（32 秒/token），但意义重大。
+
+技术亮点：使用 4-bit 量化、参数分片（trunk）等激进压缩技术；跨平台移植性好（C99 标准）；从 1.56 TB 的原始检查点压缩到 8.24 GB 内存即可运行。作者本人也在寻求 AI 研究方向的职位。`
+  },
+  "imsai-sh/zhuzhiliao": {
+    summary: `中国传统竹知了玩具的 Web 模拟版——单文件 HTML，零依赖，在浏览器里还原「一转就哇哇叫」的童年记忆。`,
+    details: `竹知了是一种中国传统竹制玩具，甩动时会发出「哇——哇——」的声音。这个项目在浏览器里精确模拟了这一体验——用 Canvas 2D 渲染物理甩动，用 Web Audio API 合成声音。单文件 HTML，零外部依赖。
+
+技术上它解决的是「传统玩具的数字化还原」：物理引擎模拟竹筒甩动的离心力、绳张力、空气阻力（1/240s 定步长积分）；主音源来自真实竹知了的录音采样，采样解码失败时回退到完整的声音合成链（锯齿波振荡器 + 共振峰滤波 + AM 调制）。
+
+值得注意的是，作者声明本项目不是开源项目，不允许再分发或公开部署，唯一官方站点是 zhuzhiliao.icu。源码公开仅用于学习交流。`
+  },
+  "thebuggeddev/anatomy": {
+    summary: `一个基于 three.js 和 GPT-5.6 Sol 构建的交互式 3D 人体解剖探索器，支持 AI 驱动的人体结构问答。`,
+    details: `这是一个结合了 3D 可视化和 AI 能力的交互式人体解剖学工具。前端使用 three.js 渲染 3D 人体模型，后端集成 GPT-5.6 Sol 提供智能问答能力——你可以点击人体的任何部位，或直接提问「这个器官的功能是什么？」。
+
+它解决的核心问题是「传统解剖学学习的交互性不足」。医学教材的 2D 图示和静态模型难以让学生直观理解人体结构的空间关系和功能。这个项目通过 3D 交互 + AI 问答的组合，让学习变得更直观、更主动。
+
+技术栈上基于 vinext（Cloudflare 的全栈框架），支持 Cloudflare D1 数据库和 Drizzle ORM。`
+  },
+  "DannyMac180/sol-advisor": {
+    summary: `一个 Codex 原生的 AI 辅助软件架构工作流，让 LLM 先做架构设计和规格说明，再分派实现任务，最后审查验收。`,
+    details: `Sol Advisor 是一套为 Codex CLI 设计的软件交付方法论。它规定了一个工作流程：主会话（GPT-5.6 Sol）先专注需求分析、架构设计和规格撰写；然后由子任务（Terra lane 或 Luna lane）负责具体的代码实现；最后主会话做差异审查和验收。
+
+它解决的核心问题是「AI 编程助手缺乏工程纪律」。当前的 AI 编码助手往往跳过设计直接写代码，导致代码质量不可控。Sol Advisor 引入了一个结构化的「架构师 + 实现者 + 审查者」的三角工作流，确保先设计后编码、代码经过审查。
+
+支持两种实现模式：原生子代理模式（自动创建 Terra 实现者 + Sol 审查者）和 Luna 任务模式（用户可见的独立 Codex 任务）。配套有技术博客《Attention Heads》深入探讨 AI 和认知科学。`
+  },
+  "KKKKhazix/human-writing": {
+    summary: `让 AI 写的中文读起来像「活人」写的——一个专注于中文写作质感提升的 Agent Skill。`,
+    details: `这个项目解决了一个非常具体的问题：AI 写的中文虽然通顺，但「没有作者感」——读不出是谁写的。它通过一套精细的提示词和检查脚本，让模型写出来的文章读起来像一个具体的人在说话。
+
+工作流程分三个阶段：1）材料审核——确认有足够素材可写，不凑字数；2）写作推进——每段都要带来新信息，不原地转圈；3）中文润色——白话打底，清掉「报告腔」「模型腔」和「翻案句」。
+
+1.1.0 版本的关键升级：从「禁字面」（禁止某些词汇）升级到「禁动作」（禁止某种写作姿势），比如「先给读者立一个他并没有的误解、再推翻它」这种套路，不管它穿什么语言外衣都会被拦截。支持知乎、公众号、博客、小说、科普等多种中文写作场景。`
+  },
+  "Binaryify/open-kimi-ppt-skill": {
+    summary: `通过逆向 Kimi Slides 实现的非官方 PPT 生成 Skill，让 AI Agent 可以直接创建、编辑和导出 PPT/PPTX 文件。`,
+    details: `这个项目逆向分析了 Kimi Slides 的 PPTD 格式和通信协议，实现了一个让 AI 编码助手直接生成 PPT 的 Skill。每次生成默认输出两份文件：可继续编辑的 PPTD 项目 + 可直接使用的 PPTX。支持页内元素动画、预设主题、本地浏览器编辑器。
+
+它解决的核心问题是「AI 无法直接生成格式化的演示文稿」。虽然 AI 可以写 Markdown 或 HTML，但生成真正的 PPTX 文件一直是个痛点。这个项目填补了这一空白，让 Codex、Claude Code、Cursor 等 Agent 可以「一句话生成 PPT」。
+
+仅需 npx 即可安装，支持多种 Agent 平台。非 Kimi 官方项目，仅供学习研究使用。`
+  },
+  "Accio-org/RealReplicaBench": {
+    summary: `由阿里国际 Accio 团队开发的长周期 Agent 评测基准——107 个真实电商工作流任务，评估 AI Agent 的端到端执行能力。`,
+    details: `RealReplicaBench 是一个评估 AI Agent 在真实商业场景中执行长周期任务能力的基准测试。由阿里巴巴国际站的 Accio 团队开发维护。
+
+它解决的问题是「现有评测基准过于简单」。大多数 Agent 评测只测试单步问答或简单工具调用，而真实业务场景需要 Agent 执行包含十几个步骤的复杂工作流。RRB 包含 107 个任务，涵盖浏览器操作、CLI 工具、API/MCP 工作流、文档/电子表格制作、公开网络研究、供应商分析、商品发布、物流和电商运营等真实场景。
+
+每个任务都在高保真、有状态、可重现的线上服务副本中运行，确保评测结果可复现。支持 OpenClaw 作为测试框架。提供在线排行榜。`
+  },
+  "ZzzLc0405/photo-abstract-editorial": {
+    summary: `一个 Codex Skill，将照片转化为「摄影区域 + 抽象面板 + 英文标题」的编辑作品，保留真实内容同时提取抽象美学。`,
+    details: `这个项目是一个 Codex Agent Skill，输入一张照片，输出一幅竖向编排的编辑作品：上方保留原始摄影区域，下方是由照片本身的空间关系、构图节奏和色彩关系推导出的极简抽象面板，配一个原创英文标题。
+
+它不是滤镜、不是风格迁移、不是照片重画——抽象面板中的每个元素都能追溯到原照片中真实存在的视觉事实。它是一个「从真实中提炼抽象」的创作工具。
+
+使用者可以自由调整照片与面板比例、颜色倾向、抽象形式（色块/线条/有机形状等）、版式排布。适合摄影师、设计师、艺术家等人群。`
+  },
+  "x4gKing/3x-ui-multi": {
+    summary: `一个基于 3x-ui 的多用户管理面板，用于代理/VPN 服务的批量用户管理和流量监控。`,
+    details: `这是一个基于 3x-ui（X-UI 的衍生版）的多用户管理面板。项目获得了 863 个 Stars 和 2,351 个 Forks（高 fork/star 比通常意味着被广泛部署使用），主要服务于需要批量管理代理用户和流量的场景。
+
+它解决的核心问题是「代理服务的管理效率」。当需要为多个用户提供代理服务时，逐个管理账号、流量配额、到期时间非常低效。这个面板提供了用户管理、流量统计、节点配置等一站式功能。
+
+注意：此类工具的使用需要遵守当地法律法规，仅建议用于合法的网络管理场景。`
+  }
 };
 
 // ============================================================
 // 仓库数据
 // ============================================================
-const REPOS = [{"name": "firecrawl/anydoc", "stars": "7,801", "forks": "355", "lang": "Rust", "rank": "01", "topics": [], "desc": "Convert Word, PowerPoint, Excel, OpenDocument, RTF, EPUB, CSV, and PDF to clean Markdown. Built in Rust, with Node.js and Python bindings.", "url": "https://github.com/firecrawl/anydoc", "pushed": "2026-08-06T19:29:58Z", "interpreted": false}, {"name": "FareedKhan-dev/kimi-k3-in-c", "stars": "2,787", "forks": "463", "lang": "C", "rank": "02", "topics": ["avx2", "c99", "cpu-inference", "deep-learning", "from-scratch"], "desc": "A 2.78-trillion-parameter Kimi K3 running inference on a single CPU in 8.24 GB of RAM. Portable C99: no BLAS, no framework, no GPU.", "url": "https://github.com/FareedKhan-dev/kimi-k3-in-c", "pushed": "2026-08-06T14:48:00Z", "interpreted": false}, {"name": "imsai-sh/zhuzhiliao", "stars": "2,288", "forks": "292", "lang": "HTML", "rank": "03", "topics": [], "desc": "竹知了 —— 一转就哇哇叫的传统玩具，Web 模拟版。零依赖单文件，真实录音采样，移动端优先。", "url": "https://github.com/imsai-sh/zhuzhiliao", "pushed": "2026-08-04T11:33:10Z", "interpreted": false}, {"name": "thebuggeddev/anatomy", "stars": "1,835", "forks": "527", "lang": "TypeScript", "rank": "04", "topics": [], "desc": "An interactive 3D human anatomy explorer built using threejs with GPT 5.6 Sol", "url": "https://github.com/thebuggeddev/anatomy", "pushed": "2026-08-02T11:29:29Z", "interpreted": false}, {"name": "DannyMac180/sol-advisor", "stars": "1,679", "forks": "122", "lang": "Shell", "rank": "05", "topics": [], "desc": "Codex-native architect orchestration with Luna and Terra implementation lanes and mandatory fresh Sol review.", "url": "https://github.com/DannyMac180/sol-advisor", "pushed": "2026-08-04T10:20:51Z", "interpreted": false}, {"name": "KKKKhazix/human-writing", "stars": "1,546", "forks": "134", "lang": "Python", "rank": "06", "topics": ["agent-skills", "chinese-writing", "creative-writing", "writing-skill"], "desc": "让 AI 写的中文读起来像一个具体的人在说话。通用创作与改稿 Skill，开箱即用。", "url": "https://github.com/KKKKhazix/human-writing", "pushed": "2026-08-05T10:38:38Z", "interpreted": false}, {"name": "Binaryify/open-kimi-ppt-skill", "stars": "1,278", "forks": "342", "lang": "Python", "rank": "07", "topics": [], "desc": "非官方 Kimi Slides Skill：让 AI Agent 生成可编辑 PPTD + PPTX，并附带本地浏览器编辑器 Unofficial Kimi Slides skill for AI agents — generate editable PPTD + PPTX with a local browser editor", "url": "https://github.com/Binaryify/open-kimi-ppt-skill", "pushed": "2026-08-06T14:33:54Z", "interpreted": false}, {"name": "Accio-org/RealReplicaBench", "stars": "1,034", "forks": "74", "lang": "HTML", "rank": "08", "topics": [], "desc": "RealReplicaBench: Benchmarking Long-Horizon Agents in High-Fidelity, Stateful, and Reproducible Replicas of Real Online Services", "url": "https://github.com/Accio-org/RealReplicaBench", "pushed": "2026-08-06T10:48:17Z", "interpreted": false}, {"name": "ZzzLc0405/photo-abstract-editorial", "stars": "917", "forks": "49", "lang": "通用", "rank": "09", "topics": [], "desc": "", "url": "https://github.com/ZzzLc0405/photo-abstract-editorial", "pushed": "2026-08-04T09:38:25Z", "interpreted": false}, {"name": "x4gKing/3x-ui-multi", "stars": "863", "forks": "2,351", "lang": "JavaScript", "rank": "10", "topics": [], "desc": "", "url": "https://github.com/x4gKing/3x-ui-multi", "pushed": "2026-08-01T12:40:28Z", "interpreted": false}];
+const REPOS = [{"name": "firecrawl/anydoc", "stars": "7,807", "forks": "356", "lang": "Rust", "rank": "01", "topics": [], "desc": "Convert Word, PowerPoint, Excel, OpenDocument, RTF, EPUB, CSV, and PDF to clean Markdown. Built in Rust, with Node.js and Python bindings.", "url": "https://github.com/firecrawl/anydoc", "pushed": "2026-08-06T19:29:58Z", "interpreted": true}, {"name": "FareedKhan-dev/kimi-k3-in-c", "stars": "2,787", "forks": "463", "lang": "C", "rank": "02", "topics": ["avx2", "c99", "cpu-inference", "deep-learning", "from-scratch"], "desc": "A 2.78-trillion-parameter Kimi K3 running inference on a single CPU in 8.24 GB of RAM. Portable C99: no BLAS, no framework, no GPU.", "url": "https://github.com/FareedKhan-dev/kimi-k3-in-c", "pushed": "2026-08-06T14:48:00Z", "interpreted": true}, {"name": "imsai-sh/zhuzhiliao", "stars": "2,288", "forks": "292", "lang": "HTML", "rank": "03", "topics": [], "desc": "竹知了 —— 一转就哇哇叫的传统玩具，Web 模拟版。零依赖单文件，真实录音采样，移动端优先。", "url": "https://github.com/imsai-sh/zhuzhiliao", "pushed": "2026-08-04T11:33:10Z", "interpreted": true}, {"name": "thebuggeddev/anatomy", "stars": "1,835", "forks": "528", "lang": "TypeScript", "rank": "04", "topics": [], "desc": "An interactive 3D human anatomy explorer built using threejs with GPT 5.6 Sol", "url": "https://github.com/thebuggeddev/anatomy", "pushed": "2026-08-02T11:29:29Z", "interpreted": true}, {"name": "DannyMac180/sol-advisor", "stars": "1,679", "forks": "122", "lang": "Shell", "rank": "05", "topics": [], "desc": "Codex-native architect orchestration with Luna and Terra implementation lanes and mandatory fresh Sol review.", "url": "https://github.com/DannyMac180/sol-advisor", "pushed": "2026-08-04T10:20:51Z", "interpreted": true}, {"name": "KKKKhazix/human-writing", "stars": "1,546", "forks": "134", "lang": "Python", "rank": "06", "topics": ["agent-skills", "chinese-writing", "creative-writing", "writing-skill"], "desc": "让 AI 写的中文读起来像一个具体的人在说话。通用创作与改稿 Skill，开箱即用。", "url": "https://github.com/KKKKhazix/human-writing", "pushed": "2026-08-05T10:38:38Z", "interpreted": true}, {"name": "Binaryify/open-kimi-ppt-skill", "stars": "1,278", "forks": "342", "lang": "Python", "rank": "07", "topics": [], "desc": "非官方 Kimi Slides Skill：让 AI Agent 生成可编辑 PPTD + PPTX，并附带本地浏览器编辑器 Unofficial Kimi Slides skill for AI agents — generate editable PPTD + PPTX with a local browser editor", "url": "https://github.com/Binaryify/open-kimi-ppt-skill", "pushed": "2026-08-06T14:33:54Z", "interpreted": true}, {"name": "Accio-org/RealReplicaBench", "stars": "1,034", "forks": "74", "lang": "HTML", "rank": "08", "topics": [], "desc": "RealReplicaBench: Benchmarking Long-Horizon Agents in High-Fidelity, Stateful, and Reproducible Replicas of Real Online Services", "url": "https://github.com/Accio-org/RealReplicaBench", "pushed": "2026-08-06T10:48:17Z", "interpreted": true}, {"name": "ZzzLc0405/photo-abstract-editorial", "stars": "917", "forks": "49", "lang": "通用", "rank": "09", "topics": [], "desc": "", "url": "https://github.com/ZzzLc0405/photo-abstract-editorial", "pushed": "2026-08-04T09:38:25Z", "interpreted": true}, {"name": "x4gKing/3x-ui-multi", "stars": "863", "forks": "2,351", "lang": "JavaScript", "rank": "10", "topics": [], "desc": "", "url": "https://github.com/x4gKing/3x-ui-multi", "pushed": "2026-08-01T12:40:28Z", "interpreted": true}];
 
 // ============================================================
 // 渲染页面
