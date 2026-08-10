@@ -95,7 +95,7 @@
 
 <div class="header">
   <h1>GitHub Trending <span>实时解读</span></h1>
-  <p class="sub" id="dateLabel">2026-08-07</p>
+  <p class="sub" id="dateLabel">2026-08-10</p>
   <div class="header-meta">
     <span id="countLabel">10 个项目</span>
     <span>由 AI 逐仓库深度解读 · 自动定期更新</span>
@@ -113,46 +113,6 @@
 // 预置解读数据（由 update_trending.py 根据缓存生成）
 // ============================================================
 const INSIGHTS = {
-  "firecrawl/anydoc": {
-    summary: `由 Firecrawl 开发的高性能文档转 Markdown 库，支持 Word、PPT、PDF 等十余种格式，毫秒级转换，为 LLM 输入准备数据。`,
-    details: `这是一个用 Rust 编写的文档转换库，能把 Word、PowerPoint、Excel、PDF、EPUB、CSV 等十余种办公文档格式转换成干净的 GitHub Flavored Markdown。由知名的网页抓取服务 Firecrawl 开发，也是其 Parse API 的底层引擎。
-
-它解决的核心问题是「AI 无法直接读取办公文档」。大语言模型需要纯文本或 Markdown 输入，而现实世界的数据大量存储在 .docx、.pptx、.pdf 中。anydoc 让开发者可以在毫秒级把这些文档转换成 LLM-ready 的格式。
-
-亮点包括：同时提供 Node.js、Python、浏览器（WASM）绑定，浏览器版文件不会离开本机；支持 CLI 命令和 Agent Skill（一行 npx 即可安装），让 Claude Code、Codex 等 AI 编码助手直接读取文档；单次转换在个位数毫秒内完成。`
-  },
-  "FareedKhan-dev/kimi-k3-in-c": {
-    summary: `纯 C99 实现的 Kimi K3 推理引擎，2.78 万亿参数模型仅用 8.24 GB 内存 + 单 CPU 就能运行，体积仅 176 KB。`,
-    details: `这个项目用纯 C99（无任何第三方库依赖）实现了 Moonshot AI 的 Kimi K3 大模型的推理引擎。参数规模 2.78 万亿，但峰值内存仅 8.24 GB，可以在普通笔记本电脑上运行。整个引擎仅 176 KB。
-
-它解决的核心问题是「大模型推理的硬件门槛」。目前运行大模型通常需要高端 GPU，显存成本极高。这个项目证明了一个 2.78T 参数模型可以在没有 BLAS、没有框架、没有 GPU 的普通 CPU 上运行，虽然速度较慢（32 秒/token），但意义重大。
-
-技术亮点：使用 4-bit 量化、参数分片（trunk）等激进压缩技术；跨平台移植性好（C99 标准）；从 1.56 TB 的原始检查点压缩到 8.24 GB 内存即可运行。作者本人也在寻求 AI 研究方向的职位。`
-  },
-  "imsai-sh/zhuzhiliao": {
-    summary: `中国传统竹知了玩具的 Web 模拟版——单文件 HTML，零依赖，在浏览器里还原「一转就哇哇叫」的童年记忆。`,
-    details: `竹知了是一种中国传统竹制玩具，甩动时会发出「哇——哇——」的声音。这个项目在浏览器里精确模拟了这一体验——用 Canvas 2D 渲染物理甩动，用 Web Audio API 合成声音。单文件 HTML，零外部依赖。
-
-技术上它解决的是「传统玩具的数字化还原」：物理引擎模拟竹筒甩动的离心力、绳张力、空气阻力（1/240s 定步长积分）；主音源来自真实竹知了的录音采样，采样解码失败时回退到完整的声音合成链（锯齿波振荡器 + 共振峰滤波 + AM 调制）。
-
-值得注意的是，作者声明本项目不是开源项目，不允许再分发或公开部署，唯一官方站点是 zhuzhiliao.icu。源码公开仅用于学习交流。`
-  },
-  "thebuggeddev/anatomy": {
-    summary: `一个基于 three.js 和 GPT-5.6 Sol 构建的交互式 3D 人体解剖探索器，支持 AI 驱动的人体结构问答。`,
-    details: `这是一个结合了 3D 可视化和 AI 能力的交互式人体解剖学工具。前端使用 three.js 渲染 3D 人体模型，后端集成 GPT-5.6 Sol 提供智能问答能力——你可以点击人体的任何部位，或直接提问「这个器官的功能是什么？」。
-
-它解决的核心问题是「传统解剖学学习的交互性不足」。医学教材的 2D 图示和静态模型难以让学生直观理解人体结构的空间关系和功能。这个项目通过 3D 交互 + AI 问答的组合，让学习变得更直观、更主动。
-
-技术栈上基于 vinext（Cloudflare 的全栈框架），支持 Cloudflare D1 数据库和 Drizzle ORM。`
-  },
-  "DannyMac180/sol-advisor": {
-    summary: `一个 Codex 原生的 AI 辅助软件架构工作流，让 LLM 先做架构设计和规格说明，再分派实现任务，最后审查验收。`,
-    details: `Sol Advisor 是一套为 Codex CLI 设计的软件交付方法论。它规定了一个工作流程：主会话（GPT-5.6 Sol）先专注需求分析、架构设计和规格撰写；然后由子任务（Terra lane 或 Luna lane）负责具体的代码实现；最后主会话做差异审查和验收。
-
-它解决的核心问题是「AI 编程助手缺乏工程纪律」。当前的 AI 编码助手往往跳过设计直接写代码，导致代码质量不可控。Sol Advisor 引入了一个结构化的「架构师 + 实现者 + 审查者」的三角工作流，确保先设计后编码、代码经过审查。
-
-支持两种实现模式：原生子代理模式（自动创建 Terra 实现者 + Sol 审查者）和 Luna 任务模式（用户可见的独立 Codex 任务）。配套有技术博客《Attention Heads》深入探讨 AI 和认知科学。`
-  },
   "KKKKhazix/human-writing": {
     summary: `让 AI 写的中文读起来像「活人」写的——一个专注于中文写作质感提升的 Agent Skill。`,
     details: `这个项目解决了一个非常具体的问题：AI 写的中文虽然通顺，但「没有作者感」——读不出是谁写的。它通过一套精细的提示词和检查脚本，让模型写出来的文章读起来像一个具体的人在说话。
@@ -160,22 +120,6 @@ const INSIGHTS = {
 工作流程分三个阶段：1）材料审核——确认有足够素材可写，不凑字数；2）写作推进——每段都要带来新信息，不原地转圈；3）中文润色——白话打底，清掉「报告腔」「模型腔」和「翻案句」。
 
 1.1.0 版本的关键升级：从「禁字面」（禁止某些词汇）升级到「禁动作」（禁止某种写作姿势），比如「先给读者立一个他并没有的误解、再推翻它」这种套路，不管它穿什么语言外衣都会被拦截。支持知乎、公众号、博客、小说、科普等多种中文写作场景。`
-  },
-  "Binaryify/open-kimi-ppt-skill": {
-    summary: `通过逆向 Kimi Slides 实现的非官方 PPT 生成 Skill，让 AI Agent 可以直接创建、编辑和导出 PPT/PPTX 文件。`,
-    details: `这个项目逆向分析了 Kimi Slides 的 PPTD 格式和通信协议，实现了一个让 AI 编码助手直接生成 PPT 的 Skill。每次生成默认输出两份文件：可继续编辑的 PPTD 项目 + 可直接使用的 PPTX。支持页内元素动画、预设主题、本地浏览器编辑器。
-
-它解决的核心问题是「AI 无法直接生成格式化的演示文稿」。虽然 AI 可以写 Markdown 或 HTML，但生成真正的 PPTX 文件一直是个痛点。这个项目填补了这一空白，让 Codex、Claude Code、Cursor 等 Agent 可以「一句话生成 PPT」。
-
-仅需 npx 即可安装，支持多种 Agent 平台。非 Kimi 官方项目，仅供学习研究使用。`
-  },
-  "Accio-org/RealReplicaBench": {
-    summary: `由阿里国际 Accio 团队开发的长周期 Agent 评测基准——107 个真实电商工作流任务，评估 AI Agent 的端到端执行能力。`,
-    details: `RealReplicaBench 是一个评估 AI Agent 在真实商业场景中执行长周期任务能力的基准测试。由阿里巴巴国际站的 Accio 团队开发维护。
-
-它解决的问题是「现有评测基准过于简单」。大多数 Agent 评测只测试单步问答或简单工具调用，而真实业务场景需要 Agent 执行包含十几个步骤的复杂工作流。RRB 包含 107 个任务，涵盖浏览器操作、CLI 工具、API/MCP 工作流、文档/电子表格制作、公开网络研究、供应商分析、商品发布、物流和电商运营等真实场景。
-
-每个任务都在高保真、有状态、可重现的线上服务副本中运行，确保评测结果可复现。支持 OpenClaw 作为测试框架。提供在线排行榜。`
   },
   "ZzzLc0405/photo-abstract-editorial": {
     summary: `一个 Codex Skill，将照片转化为「摄影区域 + 抽象面板 + 英文标题」的编辑作品，保留真实内容同时提取抽象美学。`,
@@ -185,20 +129,78 @@ const INSIGHTS = {
 
 使用者可以自由调整照片与面板比例、颜色倾向、抽象形式（色块/线条/有机形状等）、版式排布。适合摄影师、设计师、艺术家等人群。`
   },
-  "x4gKing/3x-ui-multi": {
-    summary: `一个基于 3x-ui 的多用户管理面板，用于代理/VPN 服务的批量用户管理和流量监控。`,
-    details: `这是一个基于 3x-ui（X-UI 的衍生版）的多用户管理面板。项目获得了 863 个 Stars 和 2,351 个 Forks（高 fork/star 比通常意味着被广泛部署使用），主要服务于需要批量管理代理用户和流量的场景。
+  "Binaryify/open-kimi-ppt-skill": {
+    summary: `通过逆向 Kimi Slides 实现的非官方 PPT 生成 Skill，让 AI Agent 可以直接创建、编辑和导出 PPT/PPTX 文件。`,
+    details: `这个项目逆向分析了 Kimi Slides 的 PPTD 格式和通信协议，实现了一个让 AI 编码助手直接生成 PPT 的 Skill。每次生成默认输出两份文件：可继续编辑的 PPTD 项目 + 可直接使用的 PPTX。支持页内元素动画、预设主题、本地浏览器编辑器。
 
-它解决的核心问题是「代理服务的管理效率」。当需要为多个用户提供代理服务时，逐个管理账号、流量配额、到期时间非常低效。这个面板提供了用户管理、流量统计、节点配置等一站式功能。
+它解决的核心问题是「AI 无法直接生成格式化的演示文稿」。虽然 AI 可以写 Markdown 或 HTML，但生成真正的 PPTX 文件一直是个痛点。这个项目填补了这一空白，让 Codex、Claude Code、Cursor 等 Agent 可以「一句话生成 PPT」。
 
-注意：此类工具的使用需要遵守当地法律法规，仅建议用于合法的网络管理场景。`
+仅需 npx 即可安装，支持多种 Agent 平台。非 Kimi 官方项目，仅供学习研究使用。`
+  },
+  "ShawnPana/phone-harness": {
+    summary: `让 AI Agent 直接操控你的真实 iPhone——通过 macOS iPhone Mirroring 实现，无需越狱、Xcode 或 WebDriverAgent。`,
+    details: `这是一个将大语言模型直接连接到真实 iPhone 的桥梁工具。它利用 macOS 的 iPhone Mirroring 功能作为传输层：通过 screencapture + Vision 框架 OCR 来实现「看」，通过 HID 级别的 CGEvents 来实现「点」。
+
+它解决的核心问题是「AI 操控手机的门槛太高」。现有的方案要么需要越狱、要么需要 Xcode 开发环境、要么依赖 WebDriverAgent 这种重量级框架。Phone Harness 只需要 iPhone Mirroring 配对一次，Agent 就能直接操控手机。
+
+工作模式非常简单：Agent 调用 ocr() 查看屏幕，找到目标元素坐标，调用 tap() 点击，然后 wait_stable() 确认结果。所有辅助函数在运行过程中可以动态补充到 agent_helpers.py 中。作者称它为「你的手机，由 Agent 驱动」。`
+  },
+  "mikiarlo3/awesome-growth-hacking-skills": {
+    summary: `AI Agent 增长黑客技能大全——精选开源 AI Agent 技能，覆盖营销、销售、SEO、内容创作等增长场景。`,
+    details: `这是一个精选的 AI Agent 增长黑客与营销技能目录，由 enso.bot 策划维护。它整理了大量的开源 Agent Skill（适用于 Claude Code、Cursor、OpenClaw 等），帮助团队用 AI 自动化增长工作流。
+
+它解决的核心问题是「增长团队不知道 AI Agent 能做什么」。营销领域有大量可自动化的重复工作——SEO 优化、竞品调研、邮件营销、内容分发等，但大多数人不知道已有现成的开源 Agent Skill 可用。这个目录把散落在 GitHub 各处的增长相关 Skill 整合到一个地方。
+
+分类涵盖：策略定位、客户研究、SEO/GEO/AEO、转化率优化、文案写作、邮件营销、付费广告、社交媒体、销售/SDR/ABM、产品驱动增长等十几个方向。`
+  },
+  "0xwilliamortiz/claude-red": {
+    summary: `把 Claude 变成上下文感知的红队操作员——58 个即插即用的 SKILL.md 文件，覆盖 13 个网络安全分类。`,
+    details: `这是一个针对 Claude（以及其他兼容 Agent）的进攻性安全技能集合。它提供了 58 个即插即用的 SKILL.md 文件，覆盖 Web 应用安全、身份认证、Active Directory、无线安全、云安全、移动安全、IoT、漏洞利用开发、AI 安全等 13 个分类。
+
+它解决的核心问题是「AI 在安全测试中缺乏专业领域知识」。安全测试涉及的领域极其广泛，每个子领域都有特定的工具、技术和思维模式。claude-red 把这些专业知识封装成了标准化的 Skill 文件，让 AI Agent 在需要时自动加载对应领域的技能。
+
+每个 Skill 都是独立的 Markdown 文件，可以按需启用。项目在 GitHub 上快速增长（700+ Stars），反映了安全社区对 AI 辅助渗透测试的强烈需求。`
+  },
+  "xoreaxeaxeax/asm-hall-of-shame": {
+    summary: `汇编指令延迟的「耻辱榜」——寻找单条 CPU 指令的最慢执行时间，目前冠军 1980 亿周期（62 秒）。`,
+    details: `这个项目反其道而行之——大多数性能分析关注的是「如何让代码跑得最快」，而 Assembly Hall of Shame 寻找的是「单条指令能慢到什么程度」。
+
+它利用巧妙的硬件技巧来制造极端延迟：比如用 fxrstor64 指令从高延迟 MMIO 区域加载 512 字节的 FPU/MMX/XMM 状态，同时让多个 CPU 核心持续访问同一 PCIe 设备的不同寄存器，使 PCIe 总线被非投递式事务饱和，导致目标核心的加载请求被长时间阻塞。
+
+当前记录：AMD Ryzen 7 5800H 上一条 fxrstor64 指令耗时 62 秒（198,002,498,236 个时钟周期）。荣誉提名包括一个非对齐的 vmovdqu YMM 加载，它利用 GPU 寄存器的非投递式事务突破了系统管理模式（SMM）的基本设计。
+
+既是严肃的低级性能研究，也是一份独特的硬件幽默作品。`
+  },
+  "MengTo/kage": {
+    summary: `一个五章的京都山寺夜间漫步交互体验——Three.js 实时渲染 + 影级生成图像，纯静态页面的视觉盛宴。`,
+    details: `Kage（影）是一个艺术性交互网页：随着页面滚动，WebGL 摄像机在京都山寺中穿行。它融合了程序化生成的建筑、灯笼光、雾、雨、飘落的树叶、朱红的月亮，以及克制的辉光管线。编排版式、生成场景图和保留透明度的 WebP 前景元素叠加在 3D 世界上，构成拼贴画般的层次感。
+
+它解决的核心问题是「网页交互式叙事的可能性探索」。整个项目是一个故意保持小体量的静态站点——index.html 包含文档结构、CSS、场景构造、滚动编排和交互逻辑，无构建步骤、无包管理器。Three.js r149 采用 vendored 方式引入。
+
+技术亮点：寺庙、鸟居、灯笼、月亮、地形、雨、树叶、雾和后处理全部在运行时构造。支持章节导航、响应式移动布局、减少动效模式和自定义光标。`
+  },
+  "jd-opensource/JoyAI-Video-Edit": {
+    summary: `京东开源的实时视频编辑系统——用自然语言指令实时编辑直播视频流，720p 分辨率下达到 30 FPS。`,
+    details: `JoyAI-Video-Edit 是一个实时、指令驱动的视频编辑系统。它可以直接处理摄像头实时流或上传视频，根据自然语言指令逐帧因果地编辑，无需等待完整视频、无需预设视频长度、无需回看未来帧。端到端管线在 720×1280 分辨率下达到 30.19 FPS。
+
+它解决的核心问题是「视频编辑从离线批处理走向交互式实况」。传统视频编辑需要先录制、再导入、再渲染，整个过程耗时且无法实时调整。这个系统让用户可以对着直播画面说「把色调调暖一些」「给这个人加个光环」，画面即时响应。
+
+核心技术：结合了 MLLM（多模态大模型）条件编码器、因果视频 VAE、自回归扩散模型。已公开发布论文和 Hugging Face 模型权重。`
+  },
+  "oil-oil/oil-motion": {
+    summary: `把 AI 生成的连续动作接入网页交互的 Agent Skill——让动画跟随滚动、鼠标、触摸或设备方向自然地前进后退。`,
+    details: `Oil Motion 是一个 AI Agent 通用的交互动画 Skill。它解决的问题很具体：AI 视频生成工具产出的动画只能是「从头播到尾」的线性视频，无法与用户交互。Oil Motion 让这些动画变得可控制。
+
+工作流程分三个阶段：1）先生成关键画面（起点、中间、终点的准确状态）；2）用 AI 视频生成关键画面之间的连续动作；3）把用户的操作位置（滚动百分比、鼠标位置、触摸位置）映射到动画进度。用户反向滚动时，动画自然返回。
+
+适合的场景：产品介绍页滚动展开、鼠标跟随的角色动画、拖拽进度控制、手机触摸交互。同时处理动作连贯性、画面清晰度、加载体积和移动端表现。整个流程由 Agent 自动完成，使用者只需要描述想要的效果。`
   }
 };
 
 // ============================================================
 // 仓库数据
 // ============================================================
-const REPOS = [{"name": "firecrawl/anydoc", "stars": "7,813", "forks": "356", "lang": "Rust", "rank": "01", "topics": [], "desc": "Convert Word, PowerPoint, Excel, OpenDocument, RTF, EPUB, CSV, and PDF to clean Markdown. Built in Rust, with Node.js and Python bindings.", "url": "https://github.com/firecrawl/anydoc", "pushed": "2026-08-06T19:29:58Z", "interpreted": true}, {"name": "FareedKhan-dev/kimi-k3-in-c", "stars": "2,787", "forks": "463", "lang": "C", "rank": "02", "topics": ["avx2", "c99", "cpu-inference", "deep-learning", "from-scratch"], "desc": "A 2.78-trillion-parameter Kimi K3 running inference on a single CPU in 8.24 GB of RAM. Portable C99: no BLAS, no framework, no GPU.", "url": "https://github.com/FareedKhan-dev/kimi-k3-in-c", "pushed": "2026-08-06T14:48:00Z", "interpreted": true}, {"name": "imsai-sh/zhuzhiliao", "stars": "2,288", "forks": "292", "lang": "HTML", "rank": "03", "topics": [], "desc": "竹知了 —— 一转就哇哇叫的传统玩具，Web 模拟版。零依赖单文件，真实录音采样，移动端优先。", "url": "https://github.com/imsai-sh/zhuzhiliao", "pushed": "2026-08-04T11:33:10Z", "interpreted": true}, {"name": "thebuggeddev/anatomy", "stars": "1,835", "forks": "528", "lang": "TypeScript", "rank": "04", "topics": [], "desc": "An interactive 3D human anatomy explorer built using threejs with GPT 5.6 Sol", "url": "https://github.com/thebuggeddev/anatomy", "pushed": "2026-08-02T11:29:29Z", "interpreted": true}, {"name": "DannyMac180/sol-advisor", "stars": "1,679", "forks": "122", "lang": "Shell", "rank": "05", "topics": [], "desc": "Codex-native architect orchestration with Luna and Terra implementation lanes and mandatory fresh Sol review.", "url": "https://github.com/DannyMac180/sol-advisor", "pushed": "2026-08-04T10:20:51Z", "interpreted": true}, {"name": "KKKKhazix/human-writing", "stars": "1,546", "forks": "134", "lang": "Python", "rank": "06", "topics": ["agent-skills", "chinese-writing", "creative-writing", "writing-skill"], "desc": "让 AI 写的中文读起来像一个具体的人在说话。通用创作与改稿 Skill，开箱即用。", "url": "https://github.com/KKKKhazix/human-writing", "pushed": "2026-08-05T10:38:38Z", "interpreted": true}, {"name": "Binaryify/open-kimi-ppt-skill", "stars": "1,278", "forks": "342", "lang": "Python", "rank": "07", "topics": [], "desc": "非官方 Kimi Slides Skill：让 AI Agent 生成可编辑 PPTD + PPTX，并附带本地浏览器编辑器 Unofficial Kimi Slides skill for AI agents — generate editable PPTD + PPTX with a local browser editor", "url": "https://github.com/Binaryify/open-kimi-ppt-skill", "pushed": "2026-08-06T14:33:54Z", "interpreted": true}, {"name": "Accio-org/RealReplicaBench", "stars": "1,034", "forks": "74", "lang": "HTML", "rank": "08", "topics": [], "desc": "RealReplicaBench: Benchmarking Long-Horizon Agents in High-Fidelity, Stateful, and Reproducible Replicas of Real Online Services", "url": "https://github.com/Accio-org/RealReplicaBench", "pushed": "2026-08-06T10:48:17Z", "interpreted": true}, {"name": "ZzzLc0405/photo-abstract-editorial", "stars": "917", "forks": "49", "lang": "通用", "rank": "09", "topics": [], "desc": "", "url": "https://github.com/ZzzLc0405/photo-abstract-editorial", "pushed": "2026-08-04T09:38:25Z", "interpreted": true}, {"name": "x4gKing/3x-ui-multi", "stars": "863", "forks": "2,351", "lang": "JavaScript", "rank": "10", "topics": [], "desc": "", "url": "https://github.com/x4gKing/3x-ui-multi", "pushed": "2026-08-01T12:40:28Z", "interpreted": true}];
+const REPOS = [{"name": "KKKKhazix/human-writing", "stars": "2,157", "forks": "190", "lang": "Python", "rank": "01", "topics": ["agent-skills", "chinese-writing", "creative-writing", "writing-skill"], "desc": "让 AI 写的中文读起来像一个具体的人在说话。通用创作与改稿 Skill，开箱即用。", "url": "https://github.com/KKKKhazix/human-writing", "pushed": "2026-08-05T10:38:38Z", "interpreted": true}, {"name": "ZzzLc0405/photo-abstract-editorial", "stars": "2,056", "forks": "103", "lang": "通用", "rank": "02", "topics": [], "desc": "", "url": "https://github.com/ZzzLc0405/photo-abstract-editorial", "pushed": "2026-08-09T14:37:16Z", "interpreted": true}, {"name": "Binaryify/open-kimi-ppt-skill", "stars": "1,605", "forks": "1,165", "lang": "通用", "rank": "03", "topics": [], "desc": "非官方 Kimi Slides Skill：让 AI Agent 生成可编辑 PPTD + PPTX，并附带本地浏览器编辑器 Unofficial Kimi Slides skill for AI agents — generate editable PPTD + PPTX with a local browser editor", "url": "https://github.com/Binaryify/open-kimi-ppt-skill", "pushed": "2026-08-07T07:26:06Z", "interpreted": true}, {"name": "ShawnPana/phone-harness", "stars": "1,033", "forks": "83", "lang": "Python", "rank": "04", "topics": [], "desc": "let your agent control your phone", "url": "https://github.com/ShawnPana/phone-harness", "pushed": "2026-08-10T04:59:38Z", "interpreted": true}, {"name": "mikiarlo3/awesome-growth-hacking-skills", "stars": "802", "forks": "14", "lang": "Shell", "rank": "05", "topics": [], "desc": "Find agentic growth hacking skills for Claude, ChatGPT, Manus | by enso.bot", "url": "https://github.com/mikiarlo3/awesome-growth-hacking-skills", "pushed": "2026-08-04T20:36:02Z", "interpreted": true}, {"name": "0xwilliamortiz/claude-red", "stars": "717", "forks": "91", "lang": "JavaScript", "rank": "06", "topics": ["claude", "claude-code", "claude-code-plugin", "claude-skills", "codex"], "desc": "claude-red is a curated library of offensive security skills designed for the Claude skills system. Each skill is a structured SKILL.md file that primes Claude with expert-level methodology for a specific attack surface — from SQLi to shellcode, EDR evasion to exploit development.", "url": "https://github.com/0xwilliamortiz/claude-red", "pushed": "2026-08-09T01:21:30Z", "interpreted": true}, {"name": "xoreaxeaxeax/asm-hall-of-shame", "stars": "679", "forks": "8", "lang": "C", "rank": "07", "topics": [], "desc": "Racing to the bottom of CPU performance", "url": "https://github.com/xoreaxeaxeax/asm-hall-of-shame", "pushed": "2026-08-06T19:05:17Z", "interpreted": true}, {"name": "MengTo/kage", "stars": "679", "forks": "117", "lang": "HTML", "rank": "08", "topics": ["creative-coding", "generative-art", "interactive-storytelling", "japanese-design", "threejs"], "desc": "An interactive five-chapter night walk through a Kyoto mountain temple, rendered live in Three.js.", "url": "https://github.com/MengTo/kage", "pushed": "2026-08-09T04:46:45Z", "interpreted": true}, {"name": "jd-opensource/JoyAI-Video-Edit", "stars": "654", "forks": "27", "lang": "Python", "rank": "09", "topics": [], "desc": "[Official Repo] JoyAI-Video-Edit: Real-Time Open-Ended Video Editing with Autoregressive Diffusion", "url": "https://github.com/jd-opensource/JoyAI-Video-Edit", "pushed": "2026-08-07T04:34:37Z", "interpreted": true}, {"name": "oil-oil/oil-motion", "stars": "646", "forks": "61", "lang": "Python", "rank": "10", "topics": [], "desc": "Create smooth, responsive interactive web animations.", "url": "https://github.com/oil-oil/oil-motion", "pushed": "2026-08-09T11:49:57Z", "interpreted": true}];
 
 // ============================================================
 // 渲染页面
