@@ -95,7 +95,7 @@
 
 <div class="header">
   <h1>GitHub Trending <span>实时解读</span></h1>
-  <p class="sub" id="dateLabel">2026-08-17</p>
+  <p class="sub" id="dateLabel">2026-08-19</p>
   <div class="header-meta">
     <span id="countLabel">10 个项目</span>
     <span>由 AI 逐仓库深度解读 · 自动定期更新</span>
@@ -121,14 +121,6 @@ const INSIGHTS = {
 
 当前处于开发者预览阶段，迭代很快，会有破坏性变更。可通过 \`npx @deepseek-ai/dsh web\` 快速启动 Web UI，默认在 3080 端口。这个项目 12 万+ Stars，说明 DeepSeek 正式进军 Agent 框架领域。`
   },
-  "guillaumemeyer/watermarks-remover": {
-    summary: `剥离多厂商 AI 水印的 Agent 技能 + Python 服务，用于清理自有内容的来源标记。`,
-    details: `这是一个去除 AI 内容溯源水印的工具，以 Agent Skill + Python stdlib 服务的形式提供。可以剥离多种厂商的 AI 溯源标记（provenance marks）。
-
-它解决的问题是「AI 生成内容的来源隐私」。越来越多的 AI 工具会在输出中嵌入厂商水印来标记来源。对于希望保护自己内容隐私的用户，这个工具可以清理这些标记。
-
-注意：项目明确声明仅用于清理「你自己拥有」的内容，用于隐私和卫生目的。这是个有争议的工具，使用时需遵守相关法规和道德边界。`
-  },
   "anywhere-labs/deepseek-harness-desktop": {
     summary: `为 DeepSeek Harness 生态打造的现代 macOS/Windows 桌面客户端，内置插件市场。`,
     details: `这是 DeepSeek Harness（dsh）的桌面端应用，支持 macOS 和 Windows。为 dsh 生态提供现代化的图形界面体验，并且内置了插件生态。
@@ -145,13 +137,13 @@ const INSIGHTS = {
 
 它随 DeepSeek Harness 的爆火而快速上榜，反映了 dsh 生态的蓬勃扩张。`
   },
-  "zhu1090093659/dsh-web-ui": {
-    summary: `DeepSeek Harness（DSH）Web GUI 的插件与皮肤全家桶，含任务看板、Git 图谱等。`,
-    details: `这是 DeepSeek Harness（DSH）Web 图形界面的插件与皮肤合集。包含「梁神模式」「任务看板」「Git 图谱」「右侧面板」等丰富的界面增强功能。
+  "yjh051108/dsh-routing-suite": {
+    summary: `DSH 运行时注入器 × 思维模式路由预设套装，免重启注入工具并做任务感知的思维路由。`,
+    details: `这是一套 DeepSeek Harness（dsh）的高级工具套装，包含两个部分：1）dsh-super-injector 运行时注入器（免重启的动态工具注入/热重载/卸载）；2）router-standard 思维模式路由预设（根据任务自动切换不同的思考模式）。
 
-它解决的是「dsh Web 界面定制能力不足」的问题。通过插件和皮肤的方式，用户可以高度自定义自己的 Agent 工作界面，比如把任务状态可视化、查看 Git 提交历史图谱等。
+它解决的是「Agent 运行时的动态扩展」难题。传统上修改 Agent 的工具集需要重启，而这个注入器可以运行时动态操作，配合思维路由让 Agent 针对不同任务自动选择思考深度（RL 接口还原、深度思考优先、Pro 测量最优）。
 
-采用 Apache-2.0 许可，有完整的 CI 门禁（typecheck/test/scripts/docs）。属于 dsh 生态里聚焦前端体验的社区项目。`
+使用 PowerShell 一键安装。是 dsh 社区里比较进阶的玩法，面向想要深度定制 Agent 行为的用户。`
   },
   "xiaobright/dsh-anchored-standard": {
     summary: `DeepSeek Harness 的实验性 Agent 预设：先用最简工具集锚定会话，再按需升级到完整工具。`,
@@ -161,14 +153,6 @@ const INSIGHTS = {
 
 提供三种模式：Anchored Standard、Zero-Anchored Standard、Whoami Standard。是社区实验项目，非官方 DeepSeek 预设。`
   },
-  "yjh051108/dsh-routing-suite": {
-    summary: `DSH 运行时注入器 × 思维模式路由预设套装，免重启注入工具并做任务感知的思维路由。`,
-    details: `这是一套 DeepSeek Harness（dsh）的高级工具套装，包含两个部分：1）dsh-super-injector 运行时注入器（免重启的动态工具注入/热重载/卸载）；2）router-standard 思维模式路由预设（根据任务自动切换不同的思考模式）。
-
-它解决的是「Agent 运行时的动态扩展」难题。传统上修改 Agent 的工具集需要重启，而这个注入器可以运行时动态操作，配合思维路由让 Agent 针对不同任务自动选择思考深度（RL 接口还原、深度思考优先、Pro 测量最优）。
-
-使用 PowerShell 一键安装。是 dsh 社区里比较进阶的玩法，面向想要深度定制 Agent 行为的用户。`
-  },
   "cordiverse/paper": {
     summary: `一篇关于「时空可组合性编程范式」的学术论文，为插件系统和自进化 Agent 提供形式化基础。`,
     details: `这是一篇学术论文《A Programming Paradigm for Spatiotemporal Composability》，定义了「时间可组合性」和「空间可组合性」两个维度。时间可组合性指移除一个组件时能完全回滚其副作用；空间可组合性指能声明并响应式管理组件间依赖。
@@ -176,13 +160,21 @@ const INSIGHTS = {
 它解决的问题是「现代软件动态组合缺乏形式化基础」。从插件系统到自进化的 Agent Harness 都需要动态组合，但理论基础薄弱。这篇论文把经典的效果（effect）和共效果（coeffect）概念提升为运行时机制，形式化了可逆效果和响应式共效果，统一为单一的上下文类型。
 
 它是 DeepSeek Harness 所依赖的 Cordis 框架的设计理论基础，与 dsh 的爆火密切相关。`
+  },
+  "xoreaxeaxeax/skitter-creek-bath-salts": {
+    summary: `通过 DRAM 加扰攻击解锁 CPU 深层安全层——PSP、系统管理模式、微代码等底层硬件。`,
+    details: `这是一个极深度的底层硬件安全研究项目。它通过操控 DRAM 控制器，篡改物理内存地址翻译，打乱平台内存，从而暴露那些连内核都看不见的受保护区（carveout），破解建立在地址翻译之上的安全原语。
+
+它解决（或者说攻击）的是「CPU 底层安全机制」。通过重新布线物理 DRAM 地址，可以解锁 Platform Security Processor（PSP）、System Management Mode（SMM）、C6 DRAM 状态、CPU 微代码等「规格书没写的」深层功能。
+
+在 AMD Family 16h CPU 上开发测试（最后一代文档化 DRAM 控制器翻译寄存器的架构）。这是极其专业的安全研究工具，仅供研究使用，直接涉及 CPU 硬件底层，操作风险极高。`
   }
 };
 
 // ============================================================
 // 仓库数据
 // ============================================================
-const REPOS = [{"name": "deepseek-ai/deepseek-harness", "stars": "144,217", "forks": "14,676", "lang": "TypeScript", "rank": "01", "topics": ["ai-agents", "cordis", "dsh", "dsh-plugin"], "desc": "DeepSeek Harness: Everything is a Plugin.", "url": "https://github.com/deepseek-ai/deepseek-harness", "pushed": "2026-08-13T13:00:21Z", "interpreted": true}, {"name": "guillaumemeyer/watermarks-remover", "stars": "12,571", "forks": "1,348", "lang": "Python", "rank": "02", "topics": ["agent-skill", "ai", "c2pa", "claude", "provenance"], "desc": "Strip multi-vendor AI provenance marks: Unicode text hygiene, statistical rewrite hooks, and C2PA/metadata from PNG/JPEG/SVG/PDF/DOCX/HTML/MD", "url": "https://github.com/guillaumemeyer/watermarks-remover", "pushed": "2026-08-17T05:05:13Z", "interpreted": true}, {"name": "anywhere-labs/deepseek-harness-desktop", "stars": "10,952", "forks": "486", "lang": "TypeScript", "rank": "03", "topics": ["cordis", "cordis-plugin", "deepseek", "deepseek-harness", "desktop"], "desc": "为 DeepSeek Harness (DSH) 插件生态打造的现代化桌面端解决方案。万物皆「插件」，桌面本身也是「插件」。", "url": "https://github.com/anywhere-labs/deepseek-harness-desktop", "pushed": "2026-08-17T09:56:37Z", "interpreted": true}, {"name": "awesome-dsh-plugin/awesome-dsh-plugin", "stars": "7,083", "forks": "989", "lang": "Python", "rank": "04", "topics": ["awesome", "awesome-list", "deepseek-harness", "dsh", "dsh-plugin"], "desc": "A curated list of plugins for DeepSeek Harness (dsh) · DeepSeek Harness 插件精选列表", "url": "https://github.com/awesome-dsh-plugin/awesome-dsh-plugin", "pushed": "2026-08-17T09:41:17Z", "interpreted": true}, {"name": "zhu1090093659/dsh-web-ui", "stars": "3,915", "forks": "234", "lang": "TypeScript", "rank": "05", "topics": ["deepseek-harness", "dsh", "dsh-plugin", "web-ui"], "desc": "Plugin and skin collection for DeepSeek Harness (DSH) Web UI - task board, git graph, right-side panel, remote mobile UI, pet, live token stats, and skin center.", "url": "https://github.com/zhu1090093659/dsh-web-ui", "pushed": "2026-08-17T09:34:23Z", "interpreted": true}, {"name": "xiaobright/dsh-anchored-standard", "stars": "3,331", "forks": "103", "lang": "JavaScript", "rank": "06", "topics": ["deepseek", "deepseek-harness", "dsh-plugin", "llm-agent"], "desc": "Two-phase DeepSeek Harness preset: Minimal-aligned bootstrap, then full Standard tools (Project2 98/99)", "url": "https://github.com/xiaobright/dsh-anchored-standard", "pushed": "2026-08-17T06:19:58Z", "interpreted": true}, {"name": "yjh051108/dsh-routing-suite", "stars": "3,215", "forks": "76", "lang": "PowerShell", "rank": "07", "topics": [], "desc": "dsh-routing-suite — injector + router-standard kit: install the runtime injector first, then the task-aware reasoning-mode router preset (measured P1-P23).", "url": "https://github.com/yjh051108/dsh-routing-suite", "pushed": "2026-08-15T20:29:05Z", "interpreted": true}, {"name": "cordiverse/paper", "stars": "2,028", "forks": "80", "lang": "通用", "rank": "08", "topics": [], "desc": "A Programming Paradigm for Spatiotemporal Composability", "url": "https://github.com/cordiverse/paper", "pushed": "2026-08-13T12:54:03Z", "interpreted": true}, {"name": "dmmulroy/anti-slop", "stars": "1,905", "forks": "30", "lang": "TypeScript", "rank": "09", "topics": ["agent-skills", "linting", "oxlint", "typescript"], "desc": "Opinionated Oxlint rules for rejecting low-evidence TypeScript and JavaScript patterns", "url": "https://github.com/dmmulroy/anti-slop", "pushed": "2026-08-14T14:23:59Z", "interpreted": false}, {"name": "ccch1mneyyy/dsh-TUI", "stars": "1,753", "forks": "76", "lang": "TypeScript", "rank": "10", "topics": ["claude-code", "coding-agent", "deepseek", "deepseek-harness", "dsh-plugin"], "desc": "DSH 官方公众号收录的 TUI 补位插件：Claude Code 风，鲸鱼顶栏/实时状态/流式思考/双击 Esc 回滚/上下文进度+TPS。npm 一键装。  DSH official WeChat featured TUI plugin — Claude Code style: whale bar, live status, streaming thoughts, double-Esc rollback, context bar + TPS. npm one-click.", "url": "https://github.com/ccch1mneyyy/dsh-TUI", "pushed": "2026-08-17T10:05:48Z", "interpreted": false}];
+const REPOS = [{"name": "deepseek-ai/deepseek-harness", "stars": "164,377", "forks": "17,413", "lang": "TypeScript", "rank": "01", "topics": ["ai-agents", "cordis", "dsh", "dsh-plugin"], "desc": "DeepSeek Harness: Everything is a Plugin.", "url": "https://github.com/deepseek-ai/deepseek-harness", "pushed": "2026-08-17T12:01:58Z", "interpreted": true}, {"name": "anywhere-labs/deepseek-harness-desktop", "stars": "14,548", "forks": "677", "lang": "TypeScript", "rank": "02", "topics": ["cordis", "cordis-plugin", "deepseek", "deepseek-harness", "desktop"], "desc": "为 DeepSeek Harness (DSH) 插件生态打造的现代化桌面端解决方案。万物皆「插件」，桌面本身也是「插件」。", "url": "https://github.com/anywhere-labs/deepseek-harness-desktop", "pushed": "2026-08-19T09:49:57Z", "interpreted": true}, {"name": "awesome-dsh-plugin/awesome-dsh-plugin", "stars": "9,644", "forks": "1,418", "lang": "Python", "rank": "03", "topics": ["awesome", "awesome-list", "deepseek-harness", "dsh", "dsh-plugin"], "desc": "A curated list of plugins for DeepSeek Harness (dsh) · DeepSeek Harness 插件精选列表", "url": "https://github.com/awesome-dsh-plugin/awesome-dsh-plugin", "pushed": "2026-08-19T05:16:24Z", "interpreted": true}, {"name": "yjh051108/dsh-routing-suite", "stars": "6,193", "forks": "111", "lang": "PowerShell", "rank": "04", "topics": [], "desc": "dsh-routing-suite — injector + router-standard kit: install the runtime injector first, then the task-aware reasoning-mode router preset (measured P1-P23).", "url": "https://github.com/yjh051108/dsh-routing-suite", "pushed": "2026-08-17T16:58:53Z", "interpreted": true}, {"name": "xiaobright/dsh-anchored-standard", "stars": "3,614", "forks": "108", "lang": "JavaScript", "rank": "05", "topics": ["deepseek", "deepseek-harness", "dsh-plugin", "llm-agent"], "desc": "Two-phase DeepSeek Harness preset: Minimal-aligned bootstrap, then full Standard tools (Project2 98/99)", "url": "https://github.com/xiaobright/dsh-anchored-standard", "pushed": "2026-08-17T06:19:58Z", "interpreted": true}, {"name": "yetone/cumora", "stars": "2,587", "forks": "289", "lang": "TypeScript", "rank": "06", "topics": [], "desc": "Where agent teams gather. Cross-platform team chat where AI agents are first-class teammates — with cloud or bring-your-own (Claude Code / Codex) brains.", "url": "https://github.com/yetone/cumora", "pushed": "2026-08-19T05:31:38Z", "interpreted": false}, {"name": "cordiverse/paper", "stars": "2,347", "forks": "99", "lang": "通用", "rank": "07", "topics": [], "desc": "A Programming Paradigm for Spatiotemporal Composability", "url": "https://github.com/cordiverse/paper", "pushed": "2026-08-13T12:54:03Z", "interpreted": true}, {"name": "ccch1mneyyy/dsh-TUI", "stars": "2,042", "forks": "90", "lang": "TypeScript", "rank": "08", "topics": ["claude-code", "coding-agent", "deepseek", "deepseek-harness", "dsh-plugin"], "desc": "DSH 官方公众号收录的 TUI 补位插件：Claude Code 风，鲸鱼顶栏/实时状态/流式思考/双击 Esc 回滚/上下文进度+TPS。npm 一键装。  DSH official WeChat featured TUI plugin — Claude Code style: whale bar, live status, streaming thoughts, double-Esc rollback, context bar + TPS. npm one-click.", "url": "https://github.com/ccch1mneyyy/dsh-TUI", "pushed": "2026-08-19T09:53:28Z", "interpreted": false}, {"name": "xoreaxeaxeax/skitter-creek-bath-salts", "stars": "1,831", "forks": "148", "lang": "C", "rank": "09", "topics": [], "desc": "Unlocking _everything_ on the CPU with DRAM scrambling", "url": "https://github.com/xoreaxeaxeax/skitter-creek-bath-salts", "pushed": "2026-08-13T16:59:41Z", "interpreted": true}, {"name": "s1dashu/ip-as-logo-skill", "stars": "1,530", "forks": "63", "lang": "通用", "rank": "10", "topics": ["codex", "codex-skill", "image-generation", "logo-design", "mascot-design"], "desc": "A compact Agent Skill for highly simplified, rounded, subtly neo-skeuomorphic IP mascot logos.", "url": "https://github.com/s1dashu/ip-as-logo-skill", "pushed": "2026-08-19T05:31:57Z", "interpreted": false}];
 
 // ============================================================
 // 渲染页面
